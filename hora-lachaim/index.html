@@ -3,18 +3,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Assistant:wght@400;600;700&family=Amatic+SC:wght@700&display=swap">
 <style>
-/* Layout: one reading column; the weekly sheet is a folded A4 (two A5 halves: "בשיעור" / "במשך השבוע") shown as a paper object */
+/* Layout: short intro, one example card, then a printable A4 page holding three weekly cards */
 :root {
   --bg: #f3f6f9;
-  --surface: #ffffff;
   --fg: #1d2a3f;
   --muted: #5a6880;
   --line: #cfd8e4;
-  --class: #23508f;      /* blue: the side filled in class */
-  --class-soft: #e4ecf8;
-  --week: #2f7d55;       /* green: the side filled during the week */
-  --week-soft: #e2f2e8;
-  --sun: #e8a417;        /* star / candidate for end of year */
+  --class: #23508f;
+  --week: #2f7d55;
+  --sun: #e8a417;
   --sun-soft: #fcf1d6;
   --paper: #ffffff;
   --ink: #1d2a3f;
@@ -25,365 +22,140 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #121823; --surface: #1a2230; --fg: #e6ebf3; --muted: #9aa7bc; --line: #2f3b50;
-    --class: #8fb4f0; --class-soft: #1d2b44; --week: #7fcf9f; --week-soft: #18301f;
-    --sun: #f2c14e; --sun-soft: #3a2f12; --paper: #1d2533; --ink: #e6ebf3; --hand: #9fc0ff;
+    --bg: #121823; --fg: #e6ebf3; --muted: #9aa7bc; --line: #2f3b50;
+    --class: #8fb4f0; --week: #7fcf9f; --sun: #f2c14e; --sun-soft: #3a2f12;
+    --paper: #1d2533; --ink: #e6ebf3; --hand: #9fc0ff;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #121823; --surface: #1a2230; --fg: #e6ebf3; --muted: #9aa7bc; --line: #2f3b50;
-  --class: #8fb4f0; --class-soft: #1d2b44; --week: #7fcf9f; --week-soft: #18301f;
-  --sun: #f2c14e; --sun-soft: #3a2f12; --paper: #1d2533; --ink: #e6ebf3; --hand: #9fc0ff;
+  --bg: #121823; --fg: #e6ebf3; --muted: #9aa7bc; --line: #2f3b50;
+  --class: #8fb4f0; --week: #7fcf9f; --sun: #f2c14e; --sun-soft: #3a2f12;
+  --paper: #1d2533; --ink: #e6ebf3; --hand: #9fc0ff;
   color-scheme: dark;
 }
 
 body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
-.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; display: grid; gap: 64px; }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; line-height: 1.2; margin: 0; }
-h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); color: var(--class); }
-h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); }
-h3 { font-size: 1.2rem; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; display: grid; gap: 40px; }
+h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); color: var(--class); }
+h2 { font-size: 1.5rem; }
 p { margin: 0; max-width: 66ch; }
-.eyebrow { font-family: var(--f-display); font-weight: 600; font-size: .85rem; letter-spacing: .04em; color: var(--muted); }
-section { display: grid; gap: 22px; }
-.lead { font-size: 1.2rem; color: var(--muted); }
+header, section { display: grid; gap: 12px; }
+.muted { color: var(--muted); font-size: .95rem; }
 
-/* hero */
-.hero { gap: 18px; }
-.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 500; }
-.flow span.step { padding: 6px 14px; border-radius: 999px; background: var(--class-soft); color: var(--class); }
-.flow span.step.w { background: var(--week-soft); color: var(--week); }
-.flow span.step.s { background: var(--sun-soft); color: var(--fg); }
-.flow .arr { color: var(--muted); }
-
-/* lesson steps */
-.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: s; }
-.steps li { display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: start; counter-increment: s; }
-.steps li::before { content: counter(s); font-family: var(--f-display); font-weight: 700; font-size: 1.1rem; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--class-soft); color: var(--class); }
-.steps li.w::before { background: var(--week-soft); color: var(--week); }
-.steps li > div { min-width: 0; }
-.steps b { font-family: var(--f-display); font-weight: 600; }
-.steps .min { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .9rem; white-space: nowrap; padding-top: 8px; }
-.tip { border-inline-start: 4px solid var(--sun); background: var(--sun-soft); padding: 14px 18px; border-radius: 0 10px 10px 0; max-width: 72ch; }
-.tip p + p { margin-top: 6px; }
-.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
-.cmp div { padding: 8px 12px; border-radius: 8px; background: var(--surface); font-size: .95rem; }
-.cmp .no { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
-
-/* ===== the sheet (A4 landscape folded into two A5 halves) ===== */
-.sheet-frame { overflow-x: auto; padding-bottom: 6px; }
-.sheet {
+/* ===== weekly card ===== */
+.card {
   --s-line: #9aa9bf;
   background: var(--paper); color: var(--ink);
-  display: grid; grid-template-columns: 1fr 1fr;
-  border-radius: 6px; box-shadow: 0 1px 2px rgba(20,30,50,.08), 0 10px 30px rgba(20,30,50,.10);
+  display: grid; grid-template-columns: 1.15fr 1fr;
+  border-radius: 8px; box-shadow: 0 1px 2px rgba(20,30,50,.08), 0 8px 24px rgba(20,30,50,.10);
   font-size: 13.5px; line-height: 1.35;
 }
-.half { padding: 20px 22px; display: flex; flex-direction: column; gap: 11px; min-width: 0; }
-.half + .half { border-inline-start: 2px dashed var(--line); }
-.half-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding-bottom: 6px; border-bottom: 3px solid currentColor; }
-.half.c .half-h { color: var(--class); }
-.half.w .half-h { color: var(--week); }
-.half-h strong { font-family: var(--f-display); font-weight: 700; font-size: 1.35rem; }
-.half-h small { font-size: .85rem; color: var(--ink); }
-.fld { display: grid; gap: 3px; }
+.side { padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+.side + .side { border-inline-start: 2px dashed var(--line); }
+.side-h { font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; padding-bottom: 4px; border-bottom: 3px solid currentColor; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.side.c .side-h, .side.c .lbl { color: var(--class); }
+.side.w .side-h, .side.w .lbl { color: var(--week); }
+.side-h small { font-family: var(--f-body); font-weight: 400; font-size: .85rem; color: var(--ink); }
+.fld { display: grid; gap: 4px; }
 .lbl { font-family: var(--f-display); font-weight: 600; font-size: .95rem; }
-.half.c .lbl { color: var(--class); }
-.half.w .lbl { color: var(--week); }
-.lbl i { font-style: normal; font-family: var(--f-body); font-weight: 400; color: var(--muted); font-size: .82rem; }
-.ln { min-height: 1.55em; border-bottom: 1.5px solid var(--s-line); font-family: var(--f-hand); font-size: 1.45rem; line-height: 1.05; color: var(--hand); padding-top: 4px; }
-.box { border: 1.5px solid var(--s-line); border-radius: 10px; padding: 8px 10px; min-height: 3.4em; font-family: var(--f-hand); font-size: 1.45rem; line-height: 1.05; color: var(--hand); }
-.box.msg { border-width: 2.5px; border-color: var(--class); }
-.row { display: grid; grid-template-columns: 1fr 88px; gap: 12px; }
-.symbol { border: 1.5px dashed var(--s-line); border-radius: 10px; display: grid; place-items: center; text-align: center; font-size: .78rem; color: var(--muted); min-height: 88px; padding: 4px; }
-.symbol svg { width: 64px; height: 50px; }
-.four { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.four > div { border: 1.5px solid var(--s-line); border-radius: 8px; padding: 4px 8px 6px; min-height: 3.6em; }
-.four em { font-style: normal; font-family: var(--f-display); font-weight: 600; font-size: .8rem; color: var(--class); display: block; }
-.four span { font-family: var(--f-hand); font-size: 1.25rem; line-height: 1; color: var(--hand); }
-.commit { background: var(--class-soft); border-radius: 10px; padding: 8px 12px 10px; display: grid; gap: 2px; }
-.commit .lbl::after { content: ""; }
-.commit .ln { border-color: var(--class); }
-
+.lbl i { font-style: normal; font-family: var(--f-body); font-weight: 400; color: var(--muted); font-size: .8rem; }
+.hand { font-family: var(--f-hand); font-size: 1.4rem; line-height: 1.05; color: var(--hand); }
+.box { border: 2.5px solid var(--class); border-radius: 10px; padding: 6px 10px; min-height: 3.2em; }
+.ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.ideas div { border: 1.5px solid var(--s-line); border-radius: 8px; padding: 4px 8px; min-height: 2.9em; display: flex; align-items: center; }
+.ideas div.on { background: var(--sun-soft); border-color: var(--sun); }
+.ln { min-height: 1.5em; border-bottom: 1.5px solid var(--s-line); padding-top: 3px; }
 .days { display: flex; gap: 6px; flex-wrap: wrap; }
-.days span { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--week); display: grid; place-items: center; font-family: var(--f-display); font-weight: 600; font-size: .85rem; color: var(--week); }
+.days span { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--week); display: grid; place-items: center; font-family: var(--f-display); font-weight: 600; font-size: .82rem; color: var(--week); }
 .days span.on { background: var(--week); color: var(--paper); }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chips span { border: 1.5px solid var(--s-line); border-radius: 999px; padding: 2px 10px; font-size: .85rem; }
-.chips span.on { border-color: var(--hand); outline: 2px solid var(--hand); outline-offset: 1px; }
-.checks { display: grid; gap: 6px; }
-.chk { display: flex; align-items: center; gap: 8px; font-size: .9rem; }
-.chk .sq { width: 18px; height: 18px; border: 2px solid var(--s-line); border-radius: 4px; display: grid; place-items: center; font-family: var(--f-hand); font-size: 1.3rem; color: var(--hand); flex: none; }
-.chk.star { background: var(--sun-soft); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
-.chk.star .sq { border-color: var(--sun); border-radius: 50%; width: 22px; height: 22px; }
-.foot { margin-top: auto; display: flex; justify-content: space-between; gap: 12px; align-items: end; font-size: .8rem; color: var(--muted); }
-.stamp { width: 70px; height: 70px; border: 2px dashed var(--s-line); border-radius: 50%; display: grid; place-items: center; text-align: center; font-size: .72rem; }
+.stars { background: var(--sun-soft); border-radius: 10px; padding: 8px 10px; display: grid; gap: 6px; margin-top: auto; }
+.stars .lbl { color: var(--ink); }
+.stars-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.stars-row span { width: 28px; height: 28px; border: 2px dashed var(--sun); border-radius: 50%; display: grid; place-items: center; color: var(--sun); font-size: 1.1rem; }
 
-.sheet-note { color: var(--muted); font-size: .95rem; }
-.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: .95rem; }
-.legend span { display: inline-flex; align-items: center; gap: 6px; }
-.legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.page { display: grid; gap: 18px; }
 
-/* four places */
-.places { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.place { background: var(--surface); border-radius: 12px; padding: 16px; display: grid; gap: 6px; align-content: start; border: 1px solid var(--line); }
-.place h3 { color: var(--class); font-size: 1.1rem; }
-.place p { font-size: .95rem; color: var(--muted); }
-
-/* year map */
-.map { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
-.map div { border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 6px; text-align: center; font-family: var(--f-display); font-weight: 500; font-size: .95rem; background: var(--surface); position: relative; }
-.map div.done { background: var(--week-soft); border-color: var(--week); color: var(--week); }
-.map div.star::after { content: "★"; position: absolute; top: -9px; inset-inline-start: -6px; color: var(--sun); font-size: 1.1rem; }
-.map .month { grid-column: 1 / -1; text-align: start; border: 0; background: none; padding: 6px 0 0; font-size: .85rem; color: var(--muted); font-weight: 600; }
-
-/* end of year */
-.timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; }
-.timeline li { border-top: 4px solid var(--sun); padding-top: 10px; display: grid; gap: 4px; align-content: start; min-width: 0; }
-.timeline b { font-family: var(--f-display); font-weight: 600; }
-.timeline small { color: var(--muted); font-size: .9rem; }
-.story { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; }
-.frame { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 6px; align-content: start; }
-.frame .scr { aspect-ratio: 16 / 10; max-width: 100%; border-radius: 6px; background: var(--sun-soft); display: grid; place-items: center; font-family: var(--f-display); font-weight: 700; font-size: 1.4rem; color: var(--sun); }
-.frame b { font-family: var(--f-display); font-weight: 600; font-size: .98rem; }
-.frame p { font-size: .9rem; color: var(--muted); }
-.formats { display: flex; flex-wrap: wrap; gap: 8px; }
-.formats span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .95rem; }
-
-.print-hint { font-size: .95rem; color: var(--muted); }
-.print-only { display: none; }
-
-@media (max-width: 860px) {
-  .places, .timeline, .story { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 720px) {
-  .sheet { grid-template-columns: 1fr; }
-  .half + .half { border-inline-start: 0; border-top: 2px dashed var(--line); }
-}
-@media (max-width: 480px) {
-  .places, .timeline, .story, .cmp { grid-template-columns: 1fr; }
-  .steps li { grid-template-columns: 40px 1fr; }
-  .steps .min { grid-column: 2; padding-top: 0; }
+@media (max-width: 640px) {
+  .card { grid-template-columns: 1fr; }
+  .side + .side { border-inline-start: 0; border-top: 2px dashed var(--line); }
 }
 
-/* printing: only the blank sheet and the year map, each on its own landscape page */
-@page { size: A4 landscape; margin: 8mm; }
+@page { size: A4 portrait; margin: 8mm; }
 @media print {
-  :root, :root[data-theme="dark"] { --paper: #fff; --ink: #111; --hand: #111; --line: #999; --bg: #fff; --fg: #111; --surface: #fff; --class-soft: #eef3fb; --week-soft: #edf7f1; --sun-soft: #fdf5e1; --class: #23508f; --week: #2f7d55; --sun: #c98a00; --muted: #555; color-scheme: light; }
+  :root, :root[data-theme="dark"] { --paper: #fff; --ink: #111; --hand: #111; --line: #999; --bg: #fff; --fg: #111; --sun-soft: #fdf5e1; --class: #23508f; --week: #2f7d55; --sun: #c98a00; --muted: #555; color-scheme: light; }
   body { background: #fff; }
-  .wrap { padding: 0; gap: 0; max-width: none; }
-  .wrap > *:not(.printable) { display: none !important; }
-  .printable > *:not(.print-target) { display: none !important; }
-  .printable { break-after: page; }
-  .sheet { box-shadow: none; grid-template-columns: 1fr 1fr !important; height: 190mm; }
-  .half + .half { border-inline-start: 2px dashed #999 !important; border-top: 0 !important; }
-  .print-only { display: block; margin-bottom: 10px; font-size: 20px; }
-  .map { grid-template-columns: repeat(8, 1fr); gap: 5px; }
-  .map div { padding: 6px 4px; font-size: 13px; }
-  .map .month { padding: 2px 0 0; font-size: 11px; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .map div { transition: transform .15s; }
-  .map div:hover { transform: translateY(-2px); }
+  .wrap { padding: 0; max-width: none; display: block; }
+  .wrap > *:not(.printable), .printable > *:not(.page) { display: none !important; }
+  .page { gap: 0; }
+  .page .card { box-shadow: none; border-radius: 0; height: 92mm; grid-template-columns: 1.15fr 1fr !important; border-bottom: 1.5px dashed #999; }
+  .page .side + .side { border-inline-start: 2px dashed #999 !important; border-top: 0 !important; }
 }
 </style>
 
 <div class="wrap" dir="rtl" lang="he">
 
-  <header class="hero">
-    <span class="eyebrow">פרויקט שנתי · כיתה ג' · פרשת שבוע</span>
+  <header>
     <h1>מהשיחה לחיים</h1>
-    <p class="lead">בכל שבוע לומדות סיפור מהפרשה ורעיון משיחה של הרבי. מזקקות אותו להוראה אחת, מחליטות איך ליישם אותה, ובשבוע שאחרי מספרות איך זה הלך. בסוף השנה לכל תלמידה יש קלסר שלם של הוראות לחיים, והיא בוחרת אחת מהן ומספרת עליה בסרטון קצר.</p>
-    <div class="flow" aria-label="מהלך הפרויקט">
-      <span class="step">לומדות</span><span class="arr">←</span>
-      <span class="step">מזקקות הוראה</span><span class="arr">←</span>
-      <span class="step">מחליטות</span><span class="arr">←</span>
-      <span class="step w">מיישמות במשך השבוע</span><span class="arr">←</span>
-      <span class="step w">משתפות בשיעור הבא</span><span class="arr">←</span>
-      <span class="step s">★ בסוף השנה: הוראה אחת וסרטון</span>
-    </div>
+    <p>כרטיס קטן לכל שבוע: המסר מהשיחה ורעיונות ליישום. במשך השבוע צובעות את הימים שבהם יישמו, ולאורך כל השנה מוסיפות כוכב בכל פעם שחוזרות להוראה הזאת. בסוף השנה כל אחת בוחרת את ההוראה עם הכי הרבה כוכבים ומספרת עליה בסרטון קצר.</p>
   </header>
 
-  <section class="printable">
-    <span class="eyebrow">הדף השבועי</span>
-    <h2>דף אחד מקופל, שני צדדים</h2>
-    <p>דף A4 לרוחב שמקופל לחצי. הצד הכחול ממלאות בשיעור. הצד הירוק ממלאות במשך השבוע ומביאות לשיעור הבא. כל דף נכנס לקלסר או מודבק במחברת, וכך נבנה התיעוד של כל השנה.</p>
-    <div class="legend">
-      <span><i style="background:var(--class)"></i>בשיעור</span>
-      <span><i style="background:var(--week)"></i>במשך השבוע</span>
-      <span><i style="background:var(--sun)"></i>כוכב: מועמדת להוראה של סוף השנה</span>
-    </div>
-    <p class="sheet-note">למטה דוגמה ממולאת לפרשת נח, כפי שתלמידה יכולה למלא אותה.</p>
-    <div class="sheet-frame"><div class="sheet" id="sheet-example"></div></div>
-    <div class="print-target sheet-frame"><div class="sheet" id="sheet-blank" aria-label="דף ריק להדפסה"></div></div>
-    <p class="print-hint">הדף הריק שמעל מוכן להדפסה: פותחים את הקובץ <b>hora-lachaim/index.html</b> בדפדפן ולוחצים Ctrl+P. יודפסו רק הדף הריק ומפת השנה, כל אחד בעמוד נפרד לרוחב.</p>
-  </section>
-
   <section>
-    <span class="eyebrow">מהלך השיעור</span>
-    <h2>איך נראה שיעור של פרשת שבוע</h2>
-    <ol class="steps">
-      <li class="w"><div><b>מעגל "איך יישמתי"</b><p>3–4 תלמידות מקריאות מהצד הירוק של הדף מהשבוע שעבר. כל שבוע תלמידות אחרות, כך שכל אחת משתפת בערך פעם בחודש. המורה מטביעה חותמת.</p></div><span class="min">7 דק'</span></li>
-      <li><div><b>סיפור הפרשה</b><p>בסוף הסיפור כל אחת כותבת את הסיפור במשפט אחד בראש הדף.</p></div><span class="min">10 דק'</span></li>
-      <li><div><b>הרעיון מהשיחה</b><p>הרעיון של הרבי, בשפה של ילדות ועם משל או תמונה שקל לזכור.</p></div><span class="min">8 דק'</span></li>
-      <li><div><b>זיקוק: "הרבי אומר לי..."</b><p>שואלות יחד: אם היינו צריכות להגיד את השיחה במשפט אחד, מה הוא? מנסחות ביחד, כותבות על הלוח ומעתיקות למסגרת "המסר". אחר כך שואלות: אז מה זה אומר לי לעשות? זו ההוראה.</p></div><span class="min">5 דק'</span></li>
-      <li><div><b>סיעור רעיונות בארבעה מקומות</b><p>בבית, בכיתה, עם חברות, ביני לבין ה'. כל תלמידה כותבת רעיון אחד לפחות בכל משבצת, מתוך הלוח או משלה. ממלאות גם את "הסמל של השבוע", ציור קטן שיזכיר את ההוראה.</p></div><span class="min">7 דק'</span></li>
-      <li><div><b>ההחלטה שלי</b><p>כל אחת בוחרת דבר אחד קטן שהיא באמת תעשה השבוע וכותבת אותו במסגרת הכחולה.</p></div><span class="min">3 דק'</span></li>
-    </ol>
-    <div class="tip">
-      <p><b>הסוד הוא החלטה קטנה וברורה.</b> בכיתה ג' החלטה עובדת כשאפשר לראות אותה ולדעת אם היא קרתה. כדאי לעצור על זה בשבועות הראשונים ולתרגל.</p>
-      <div class="cmp">
-        <div class="no">"אני אהיה יותר טובה"</div>
-        <div>"ביום שלישי אעזור לאמא לערוך את השולחן בלי שתבקש"</div>
-        <div class="no">"אני אתפלל יותר"</div>
-        <div>"כל בוקר אגיד 'מודה אני' לאט, מילה מילה"</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <span class="eyebrow">בנק רעיונות</span>
-    <h2>ארבעה מקומות ליישם הוראה</h2>
-    <p>אותה הוראה נראית אחרת בכל מקום. החלוקה הקבועה עוזרת לבנות במהירות רעיונות מעשיים בכל שבוע, וגם מראה לבנות שההוראה שייכת לכל חלקי היום.</p>
-    <div class="places">
-      <div class="place"><h3>בבית</h3><p>עם ההורים והאחים, בבוקר ובערב, בשולחן שבת.</p></div>
-      <div class="place"><h3>בכיתה</h3><p>בשיעור, בהפסקה, עם המורה, בזמן מבחן או משימה קשה.</p></div>
-      <div class="place"><h3>עם חברות</h3><p>במשחק, כשמישהי עצובה או בודדה, כשיש ויכוח.</p></div>
-      <div class="place"><h3>ביני לבין ה'</h3><p>בתפילה, בברכות, במחשבה לפני השינה, בצדקה.</p></div>
-    </div>
+    <h2>דוגמה ממולאת</h2>
+    <div class="card" id="example"></div>
   </section>
 
   <section class="printable">
-    <span class="eyebrow">מפת השנה</span>
-    <h2>הקלסר שלי, פרשה אחרי פרשה</h2>
-    <p>דף הפתיחה של הקלסר. כל שבוע שבו יישמתי את ההוראה צובעת את המשבצת בירוק. הוראה שקיבלה כוכב על הדף מקבלת כוכב גם כאן, וכך בפסח רואים במבט אחד אילו הוראות "נשארו איתי".</p>
-    <div class="print-target"><h2 class="print-only">מפת השנה שלי · מהשיחה לחיים · שם: ____________</h2><div class="map" id="map"></div></div>
-  </section>
-
-  <section>
-    <span class="eyebrow">סוף השנה</span>
-    <h2>הוראה אחת שהלכה איתי כל השנה</h2>
-    <p>הכוכבים לאורך השנה הם הבסיס לבחירה. הבחירה נעשית מוקדם, כדי שבחודש האחרון התלמידה תחזור להוראה שבחרה ותיישם אותה ביודעין. כך יש לה סיפור אמיתי לספר בסרטון, ולא רק זיכרון.</p>
-    <ol class="timeline">
-      <li><b>כל השנה</b><small>כוכב על כל הוראה שמרגישה "שלי"</small></li>
-      <li><b>ניסן</b><small>עוברות על הקלסר. כל אחת בוחרת 3 כוכבים, ואז אחד מהם</small></li>
-      <li><b>אייר</b><small>חודש של יישום מכוון של ההוראה שנבחרה, עם יומן קצר</small></li>
-      <li><b>סיון</b><small>כתיבת תסריט ב-5 תמונות והקלטה</small></li>
-      <li><b>תמוז</b><small>הקרנה חגיגית בכיתה, עם האמהות</small></li>
-    </ol>
-
-    <h3>התסריט: 5 תמונות, עד שתי דקות</h3>
-    <div class="story">
-      <div class="frame"><div class="scr">1</div><b>ההוראה שלי</b><p>מאיזו פרשה היא, ומה הרבי מלמד בה. במשפט אחד.</p></div>
-      <div class="frame"><div class="scr">2</div><b>למה בחרתי בה</b><p>מה היה בה שדיבר אליי?</p></div>
-      <div class="frame"><div class="scr">3</div><b>פעם אחת שיישמתי</b><p>סיפור אחד אמיתי: איפה הייתי, מה קרה, מה עשיתי.</p></div>
-      <div class="frame"><div class="scr">4</div><b>מה השתנה בי</b><p>מה אני עושה היום אחרת מבתחילת השנה?</p></div>
-      <div class="frame"><div class="scr">5</div><b>מה אני לוקחת הלאה</b><p>איך ההוראה תמשיך איתי לכיתה ד'?</p></div>
-    </div>
-    <p>אפשר לבחור את הדרך להציג, לפי מה שנוח לכל תלמידה:</p>
-    <div class="formats">
-      <span>מדברת למצלמה</span>
-      <span>ציורים שלי וקול שלי ברקע</span>
-      <span>מצגת קצרה עם הקראה</span>
-      <span>חפץ שמסמל את ההוראה ומספרת עליו</span>
-      <span>הדפים מהקלסר מצולמים, עם הסבר</span>
-    </div>
+    <h2>דף להדפסה: שלושה כרטיסים בעמוד</h2>
+    <p class="muted">פותחים את הקובץ hora-lachaim/index.html בדפדפן ולוחצים Ctrl+P. יודפס עמוד A4 עם שלושה כרטיסים ריקים לגזירה או להדבקה במחברת.</p>
+    <div class="page" id="page"></div>
   </section>
 
 </div>
 
 <script>
 (function () {
-  var ark = '<svg viewBox="0 0 64 50" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30h52l-6 10H12z" fill="none"/><rect x="18" y="18" width="28" height="12" rx="1" fill="none"/><path d="M15 18l17-9 17 9" fill="none"/><path d="M2 46c5-3 9 3 14 0s9 3 14 0 9 3 14 0 9 3 14 0" fill="none"/></svg>';
   var dayNames = ['א','ב','ג','ד','ה','ו','ש'];
-  var feelings = ['שמחה','גאה','היה קשה אבל הצלחתי','עוד מתאמנת'];
 
-  function sheet(d) {
+  function card(d) {
     d = d || {};
-    var v = function (k) { return d[k] || ''; };
+    var h = function (t) { return t ? '<span class="hand">' + t + '</span>' : ''; };
+    var ideas = (d.ideas || ['', '', '', '']).map(function (t, i) {
+      return '<div class="' + (d.chosen === i ? 'on' : '') + '">' + h(t) + '</div>';
+    }).join('');
     var days = dayNames.map(function (n, i) {
       return '<span class="' + ((d.days || []).indexOf(i) > -1 ? 'on' : '') + '">' + n + '</span>';
     }).join('');
-    var feel = feelings.map(function (f) {
-      return '<span class="' + (d.feel === f ? 'on' : '') + '">' + f + '</span>';
-    }).join('');
-    var tick = function (b) { return b ? '✓' : ''; };
+    var stars = '';
+    for (var i = 0; i < 8; i++) stars += '<span>' + (i < (d.stars || 0) ? '★' : '') + '</span>';
     return '' +
-      '<div class="half c">' +
-        '<div class="half-h"><strong>בשיעור</strong><small>פרשת <b>' + (v('parsha') || '__________') + '</b> &nbsp; שם: ' + (v('name') || '__________') + '</small></div>' +
-        '<div class="fld"><span class="lbl">הסיפור במשפט אחד</span><div class="ln">' + v('story') + '</div></div>' +
-        '<div class="fld"><span class="lbl">המסר מהשיחה של הרבי <i>(במשפט אחד)</i></span><div class="box msg">' + v('msg') + '</div></div>' +
-        '<div class="row">' +
-          '<div class="fld"><span class="lbl">ההוראה לחיים <i>מה זה אומר לי לעשות?</i></span><div class="box">' + v('hora') + '</div></div>' +
-          '<div class="symbol">' + (d.symbol ? '<span style="color:var(--hand)">' + ark + '</span>' : '') + '<span>הסמל של השבוע</span></div>' +
-        '</div>' +
-        '<div class="fld"><span class="lbl">איך אפשר ליישם?</span>' +
-          '<div class="four">' +
-            '<div><em>בבית</em><span>' + v('home') + '</span></div>' +
-            '<div><em>בכיתה</em><span>' + v('cls') + '</span></div>' +
-            '<div><em>עם חברות</em><span>' + v('friends') + '</span></div>' +
-            '<div><em>ביני לבין ה\'</em><span>' + v('hashem') + '</span></div>' +
-          '</div></div>' +
-        '<div class="commit"><span class="lbl">ההחלטה שלי לשבוע הזה</span><div class="ln">' + v('commit') + '</div></div>' +
+      '<div class="side c">' +
+        '<div class="side-h">פרשת ' + (d.parsha || '__________') + '</div>' +
+        '<div class="fld"><span class="lbl">המסר מהשיחה של הרבי <i>(במשפט אחד)</i></span><div class="box">' + h(d.msg) + '</div></div>' +
+        '<div class="fld"><span class="lbl">איך אפשר ליישם? <i>צובעת את מה שבחרתי</i></span><div class="ideas">' + ideas + '</div></div>' +
       '</div>' +
-      '<div class="half w">' +
-        '<div class="half-h"><strong>במשך השבוע</strong><small>מביאה לשיעור הבא</small></div>' +
+      '<div class="side w">' +
+        '<div class="side-h">יישמתי</div>' +
         '<div class="fld"><span class="lbl">מד היישום <i>צובעת כל יום שבו זכרתי ועשיתי</i></span><div class="days">' + days + '</div></div>' +
-        '<div class="fld"><span class="lbl">הפעם שהכי זכרתי <i>איפה הייתי? מה קרה? מה עשיתי?</i></span>' +
-          '<div class="ln">' + v('r1') + '</div><div class="ln">' + v('r2') + '</div><div class="ln">' + v('r3') + '</div></div>' +
-        '<div class="fld"><span class="lbl">איך הרגשתי? <i>מקיפה</i></span><div class="chips">' + feel + '</div></div>' +
-        '<div class="fld"><span class="lbl">ואם לא יצא לי ליישם, מה הפריע? מה אנסה בפעם הבאה?</span><div class="ln">' + v('next') + '</div></div>' +
-        '<div class="checks">' +
-          '<div class="chk"><span class="sq">' + tick(d.shared) + '</span>סיפרתי על ההוראה בשולחן שבת</div>' +
-          '<div class="chk star"><span class="sq">' + (d.star ? '★' : '') + '</span>★ ההוראה הזאת "שלי". אני רוצה להמשיך איתה</div>' +
-        '</div>' +
-        '<div class="foot"><span>חתימת אמא: ' + (d.sign ? '<span style="font-family:var(--f-hand);font-size:1.3rem;color:var(--hand)">' + d.sign + '</span>' : '__________') + '</span><div class="stamp">חותמת<br>המורה</div></div>' +
+        '<div class="fld"><span class="lbl">יישום לדוגמה</span><div class="ln">' + h(d.ex1) + '</div><div class="ln">' + h(d.ex2) + '</div></div>' +
+        '<div class="stars"><span class="lbl">★ יישמתי שוב במשך השנה <i>כוכב או מדבקה</i></span><div class="stars-row">' + stars + '</div></div>' +
       '</div>';
   }
 
-  var example = {
-    parsha: 'נח', name: 'מושקא',
-    story: 'ה\' אמר לנח להיכנס לתיבה, והתיבה שמרה עליו מהמבול',
-    msg: 'כשמסביב "מים סוערים" אפשר להיכנס לתיבה: המילים של התורה והתפילה',
-    hora: 'כשאני מפחדת או כועסת, אני נכנסת לתיבה ואומרת מילים קדושות',
-    symbol: true,
-    home: 'לפני שאני כועסת על אחי, אומרת פסוק',
-    cls: 'פרק תהילים קצר לפני מבחן',
-    friends: 'להגיד לחברה מודאגת: בואי ניכנס לתיבה',
-    hashem: '"מודה אני" לאט, מילה מילה',
-    commit: 'כל בוקר "מודה אני" לאט, וכשמפחיד אומרת "ה\' לי ולא אירא"',
+  document.getElementById('example').innerHTML = card({
+    parsha: 'נח',
+    msg: 'כשמסביב "מים סוערים" נכנסים לתיבה: המילים של התורה והתפילה',
+    ideas: ['פסוק לפני שאני כועסת', 'תהילים לפני מבחן', '"מודה אני" לאט', 'להרגיע חברה מודאגת'],
+    chosen: 2,
     days: [0, 1, 3, 4, 5],
-    r1: 'ביום רביעי בלילה היה רעם חזק ופחדתי.',
-    r2: 'אמרתי "שמע ישראל" לאט לאט',
-    r3: 'והרגשתי שאני בתוך תיבה שמורה.',
-    feel: 'גאה',
-    next: 'ביום שלישי שכחתי, אשים פתק ליד המיטה',
-    shared: true, star: true, sign: 'אמא'
-  };
-
-  document.getElementById('sheet-example').innerHTML = sheet(example);
-  document.getElementById('sheet-blank').innerHTML = sheet();
-
-  var parshiot = [
-    ['חשוון', ['נח','לך לך','וירא','חיי שרה']],
-    ['כסלו', ['תולדות','ויצא','וישלח','וישב','מקץ']],
-    ['טבת', ['ויגש','ויחי','שמות','וארא']],
-    ['שבט', ['בא','בשלח','יתרו','משפטים']],
-    ['אדר', ['תרומה','תצוה','כי תשא','ויקהל','פקודי']],
-    ['ניסן', ['ויקרא','צו','שמיני','תזריע','מצורע']],
-    ['אייר', ['אחרי מות','קדושים','אמור','בהר','בחוקותי']],
-    ['סיון', ['במדבר','נשא','בהעלותך','שלח']],
-    ['תמוז', ['קרח','חוקת','בלק']]
-  ];
-  var html = '';
-  parshiot.forEach(function (m) {
-    html += '<div class="month">' + m[0] + ' (בערך)</div>';
-    m[1].forEach(function (p) {
-      var cls = '';
-      html += '<div class="' + cls + '">' + p + '</div>';
-    });
+    ex1: 'ברעם בלילה פחדתי ואמרתי',
+    ex2: '"שמע ישראל" לאט לאט',
+    stars: 3
   });
-  document.getElementById('map').innerHTML = html;
+
+  var page = '';
+  for (var i = 0; i < 3; i++) page += '<div class="card">' + card() + '</div>';
+  document.getElementById('page').innerHTML = page;
 })();
 </script>

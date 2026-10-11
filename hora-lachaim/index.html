@@ -1,7 +1,7 @@
 <title>מהשיחה לחיים</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Assistant:wght@400;600;700&family=Amatic+SC:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <style>
 /* Layout: short intro, one example card, then a printable A4 page holding three weekly cards */
 :root {
@@ -61,7 +61,7 @@ header, section { display: grid; gap: 12px; }
 .fld { display: grid; gap: 4px; }
 .lbl { font-family: var(--f-display); font-weight: 600; font-size: .95rem; line-height: 1.5; }
 .lbl i { font-style: normal; font-family: var(--f-body); font-weight: 400; color: var(--muted); font-size: .8rem; }
-.hand { font-family: var(--f-hand); font-size: 1.4rem; line-height: 1.05; color: var(--hand); }
+.hand { font-family: var(--f-body); font-weight: 600; font-size: 1.05rem; line-height: 1.45; color: var(--hand); }
 .box { border: 2.5px solid var(--class); border-radius: 10px; padding: 6px 10px; min-height: 3.2em; }
 .ideas { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .ideas div { border: 1.5px solid var(--s-line); border-radius: 8px; padding: 4px 8px; min-height: 2.9em; display: flex; align-items: center; }
@@ -76,7 +76,7 @@ header, section { display: grid; gap: 12px; }
 .stars-row span { width: 28px; height: 28px; border: 2px dashed var(--sun); border-radius: 50%; display: grid; place-items: center; color: var(--sun); font-size: 1.1rem; }
 
 .page { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-#example { max-width: 400px; }
+#example { max-width: 560px; font-size: 16px; }
 
 @media (max-width: 640px) {
   .page { grid-template-columns: 1fr; }
@@ -111,7 +111,7 @@ header, section { display: grid; gap: 12px; }
   </header>
 
   <section>
-    <h2>דוגמה ממולאת</h2>
+    <h2>דוגמה ממולאת: פרשת בראשית</h2>
     <div class="card" id="example"></div>
   </section>
 
@@ -153,14 +153,14 @@ header, section { display: grid; gap: 12px; }
   }
 
   document.getElementById('example').innerHTML = card({
-    parsha: 'נח',
-    msg: 'כשמסביב "מים סוערים" נכנסים לתיבה: המילים של התורה והתפילה',
-    ideas: ['פסוק לפני שאני כועסת', 'תהילים לפני מבחן', '"מודה אני" לאט', 'להרגיע חברה מודאגת'],
-    chosen: 2,
-    days: [0, 1, 3, 4, 5],
-    ex1: 'ברעם בלילה פחדתי ואמרתי',
-    ex2: '"שמע ישראל" לאט לאט',
-    stars: 3
+    parsha: 'בְּרֵאשִׁית',
+    msg: 'מָה שֶׁהֲכִי קָשֶׁה לִי – שָׁם הַיֵּצֶר הָרַע הֲכִי מִתְאַמֵּץ, כִּי זֶה הַתַּפְקִיד הַמְּיֻחָד שֶׁלִּי בָּעוֹלָם!',
+    ideas: ['לָקוּם בַּבֹּקֶר בְּלִי לְהִתְעַצֵּל', 'לְוַתֵּר לַאֲחוֹתִי', 'לֹא לְדַבֵּר בִּזְמַן הַתְּפִלָּה', 'לִשְׁתֹּק כְּשֶׁבָּא לִי לַעֲנוֹת בְּכַעַס'],
+    chosen: 1,
+    days: [0, 2, 3, 5],
+    ex1: 'אֲחוֹתִי לָקְחָה לִי אֶת הַכִּסֵּא,',
+    ex2: 'וְוִתַּרְתִּי בְּלִי לָרִיב!',
+    stars: 2
   });
 
   var page = '';

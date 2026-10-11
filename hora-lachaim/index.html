@@ -82,24 +82,24 @@ header, section { display: grid; gap: 12px; }
   .page { grid-template-columns: 1fr; }
 }
 
-@page { size: A4 portrait; margin: 8mm; }
+@page { size: A4 portrait; margin: 12mm; }
 @media print {
   :root, :root[data-theme="dark"] { --paper: #fff; --ink: #111; --hand: #111; --line: #999; --bg: #fff; --fg: #111; --sun-soft: #fdf5e1; --class: #23508f; --week: #2f7d55; --sun: #c98a00; --muted: #555; color-scheme: light; }
   body { background: #fff; }
   .wrap { padding: 0; max-width: none; display: block; }
   .wrap > *:not(.printable), .printable > *:not(.page) { display: none !important; }
   .page { gap: 6mm; grid-template-columns: 1fr 1fr !important; }
-  .page .card { box-shadow: none; height: 134mm; overflow: hidden; break-inside: avoid; font-size: 12.5px; }
-  .page .side { padding: 7px 12px; gap: 4px; }
+  .page .card { box-shadow: none; height: 126mm; overflow: hidden; break-inside: avoid; font-size: 11.8px; }
+  .page .side { padding: 5px 12px; gap: 4px; }
   .page .side-h { margin-bottom: 2px; }
   .page .side-h { font-size: 1.05rem; padding-bottom: 2px; }
-  .page .box { min-height: 3em; }
+  .page .box { min-height: 2.7em; }
   .page .ideas { gap: 5px; }
-  .page .ideas div { min-height: 2.5em; }
-  .page .ln { min-height: 1.5em; }
-  .page .days span, .page .stars-row span { width: 26px; height: 26px; }
+  .page .ideas div { min-height: 2.2em; }
+  .page .ln { min-height: 1.4em; }
+  .page .days span, .page .stars-row span { width: 23px; height: 23px; }
   .page .days, .page .stars-row { gap: 5px; }
-  .page .stars { padding: 5px 10px; gap: 3px; margin-top: 4px; }
+  .page .stars { padding: 4px 10px; gap: 2px; margin-top: 2px; }
 }
 </style>
 
@@ -155,11 +155,11 @@ header, section { display: grid; gap: 12px; }
   document.getElementById('example').innerHTML = card({
     parsha: 'בְּרֵאשִׁית',
     msg: 'מָה שֶׁהֲכִי קָשֶׁה לִי – שָׁם הַיֵּצֶר הָרַע הֲכִי מִתְאַמֵּץ, כִּי זֶה הַתַּפְקִיד הַמְּיֻחָד שֶׁלִּי בָּעוֹלָם!',
-    ideas: ['לָקוּם בַּבֹּקֶר בְּלִי לְהִתְעַצֵּל', 'לְוַתֵּר לַאֲחוֹתִי', 'לֹא לְדַבֵּר בִּזְמַן הַתְּפִלָּה', 'לִשְׁתֹּק כְּשֶׁבָּא לִי לַעֲנוֹת בְּכַעַס'],
+    ideas: ['לִבְחֹר דָּבָר אֶחָד שֶׁקָּשֶׁה לִי – וְלַעֲשׂוֹת אוֹתוֹ בְּכָל זֹאת', 'כְּשֶׁקָּשֶׁה לִי, לְהַגִּיד לְעַצְמִי: "זֶה הַתַּפְקִיד שֶׁלִּי!"', 'לִזְכֹּר: הַיֵּצֶר הָרַע מִתְאַמֵּץ – אָז גַּם אֲנִי מִתְאַמֶּצֶת', 'לִשְׂמֹחַ כְּשֶׁהִצְלַחְתִּי בְּמַשֶּׁהוּ שֶׁהָיָה לִי קָשֶׁה'],
     chosen: 1,
     days: [0, 2, 3, 5],
-    ex1: 'אֲחוֹתִי לָקְחָה לִי אֶת הַכִּסֵּא,',
-    ex2: 'וְוִתַּרְתִּי בְּלִי לָרִיב!',
+    ex1: 'הָיָה לִי קָשֶׁה, וְאָמַרְתִּי לְעַצְמִי:',
+    ex2: '"זֶה הַתַּפְקִיד שֶׁלִּי!" – וְהִצְלַחְתִּי!',
     stars: 2
   });
 

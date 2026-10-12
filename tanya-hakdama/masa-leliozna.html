@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מסע לליאזנא</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&family=Secular+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#E8906A; --orange-d:#C9673F; --purple:#5E3F70; --purple-l:#EFE6F4;
+    --cream:#FFFBEA; --paper:#fff; --ink:#2E2433; --muted:#7A6E80;
+    --yellow:#FBEFA0; --teal:#2F8F8A; --pink:#F3C9C0; --line:#B9A9C2;
+    --red:#E0344B; --amber:#F2A12E; --green:#7DBE4A; --blue:#3E8FD8;
+  }
+  @page{ size:A4; margin:0; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#e9e4ec; color:var(--ink);
+    font-family:"Assistant",sans-serif; font-size:12.5pt; line-height:1.45;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page{ width:210mm; height:297mm; margin:10mm auto; background:var(--cream);
+    position:relative; overflow:hidden; page-break-after:always; break-after:page;
+    padding:0 14mm 12mm; }
+  .page:last-child{ page-break-after:auto; break-after:auto; }
+  @media print{ html,body{ background:none; } .page{ margin:0; } }
+
+  /* header band */
+  .band{ margin:0 -14mm 7mm; height:20mm; background:var(--orange); position:relative; }
+  .band .tab{ position:absolute; top:0; left:50%; transform:translateX(-50%);
+    background:var(--purple); color:#fff; padding:3.5mm 12mm 4.5mm; border-radius:0 0 7mm 7mm;
+    font-family:"Secular One"; font-size:22pt; line-height:1.1; text-align:center; white-space:nowrap;
+    box-shadow:0 2mm 0 rgba(0,0,0,.08); }
+  .band .tab small{ display:block; font-family:"Assistant"; font-weight:600; font-size:10.5pt; opacity:.85; margin-top:1mm; }
+  .band .corner{ position:absolute; top:6mm; right:14mm; color:#fff; font-weight:800; font-size:10.5pt; }
+  .band .corner.l{ right:auto; left:14mm; }
+
+  h2{ font-family:"Secular One"; font-weight:400; color:var(--purple); font-size:16pt; margin:0 0 2mm; }
+  h3{ font-family:"Secular One"; font-weight:400; color:var(--purple); font-size:13.5pt; margin:0 0 1.5mm; }
+  p{ margin:0 0 2mm; }
+  .pill{ display:inline-block; background:var(--purple); color:#fff; font-family:"Secular One";
+    padding:1mm 5mm; border-radius:3mm 6mm 3mm 6mm; font-size:13pt; margin-bottom:2.5mm; }
+  .pill .o{ color:var(--orange); }
+
+  /* writing lines */
+  .ln{ display:inline-block; border-bottom:1.6px dotted var(--muted); min-width:40mm; height:1.1em; vertical-align:bottom; }
+  .ln.w{ display:block; width:100%; margin-top:4.5mm; }
+  .box{ display:inline-block; width:4.2mm; height:4.2mm; border:1.6px solid var(--purple); border-radius:1mm; vertical-align:-0.6mm; margin-left:1.2mm; background:#fff; }
+
+  /* roles */
+  .roles{ display:grid; grid-template-columns:repeat(4,1fr); gap:2.5mm; margin-bottom:4mm; }
+  .role{ background:#fff; border:1.5px solid var(--line); border-radius:3mm; padding:2mm 2.5mm; font-size:10.5pt; line-height:1.3; }
+  .role b{ display:block; color:var(--purple); font-size:11.5pt; }
+  .role .nm{ display:block; border-bottom:1.4px dotted var(--muted); height:5mm; margin-top:1mm; }
+
+  .intro{ background:var(--yellow); border-radius:4mm; padding:3mm 5mm; margin-bottom:4mm; font-size:11.5pt; line-height:1.4; }
+
+  /* stations */
+  .station{ position:relative; background:#fff; border-radius:5mm; padding:3.5mm 5mm 3.5mm 44mm;
+    margin-bottom:4mm; border:1.5px solid #eadfe8; box-shadow:0 1mm 0 #eadfe8; }
+  .station .num{ position:absolute; top:-3mm; right:-3mm; width:12mm; height:12mm; border-radius:50%;
+    background:var(--purple); color:#fff; font-family:"Secular One"; font-size:17pt; display:flex;
+    align-items:center; justify-content:center; border:2px solid #fff; box-shadow:0 0 0 2px var(--purple); }
+  .station h3{ padding-right:9mm; }
+  .station .src{ display:inline-block; background:var(--pink); color:var(--orange-d); font-weight:800;
+    font-size:9.5pt; padding:.3mm 3mm; border-radius:2mm; margin-right:2mm; vertical-align:2px; font-family:"Assistant"; }
+  .station ol{ margin:0; padding-right:5mm; }
+  .station li{ margin-bottom:1.6mm; }
+  .station li::marker{ color:var(--orange-d); font-weight:800; }
+  .stamp{ position:absolute; left:4mm; top:50%; transform:translateY(-50%); width:36mm;
+    border:2px dashed var(--orange); border-radius:4mm; text-align:center; padding:2mm 1.5mm; background:var(--cream); }
+  .stamp .hand{ font-size:16pt; line-height:1; }
+  .stamp .t{ font-size:9pt; font-weight:700; color:var(--orange-d); line-height:1.2; margin:1mm 0 1.5mm; }
+  .stamp .slot{ height:13mm; border-radius:2.5mm; background:#fff; border:1.4px solid #f0d2c3; display:flex;
+    align-items:center; justify-content:center; color:#d9b7a7; font-size:8.5pt; }
+  .checks{ display:flex; flex-wrap:wrap; gap:1.5mm 6mm; margin:1mm 0; }
+  .p2 .station{ margin-bottom:6mm; padding-top:5mm; padding-bottom:5mm; } .p2 .station li{ margin-bottom:2.6mm; }
+  .final{ background:var(--purple-l); border:2px solid var(--purple); }
+  .final .num{ background:var(--orange); box-shadow:0 0 0 2px var(--orange); font-size:15pt; }
+  .slots5{ display:flex; gap:2mm; margin:2mm 0 1mm; direction:rtl; }
+  .slots5 span{ flex:1; height:12mm; border-radius:2.5mm; background:#fff; border:1.6px dashed var(--purple); }
+  .quiet{ background:#fff; border-radius:3mm; padding:2.5mm 4mm; margin-top:2mm; }
+  .quiet b{ color:var(--purple); }
+  .foot{ position:absolute; bottom:5mm; left:0; right:0; text-align:center; font-size:9.5pt; color:var(--muted); }
+  .foot b{ background:var(--orange); color:#fff; border-radius:2mm; padding:.5mm 4mm; margin:0 2mm; }
+
+  /* teacher pages */
+  .tl{ width:100%; border-collapse:separate; border-spacing:0 2mm; margin-bottom:3mm; }
+  .tl td{ background:#fff; padding:2.5mm 4mm; vertical-align:top; font-size:11.5pt; }
+  .tl td:first-child{ width:24mm; background:var(--purple); color:#fff; font-family:"Secular One"; text-align:center;
+    border-radius:0 3mm 3mm 0; font-size:13pt; vertical-align:middle; }
+  .tl td:last-child{ border-radius:3mm 0 0 3mm; }
+  .tl td b{ color:var(--purple); }
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:5mm; }
+  .card{ background:#fff; border-radius:4mm; padding:3.5mm 5mm; margin-bottom:4mm; border:1.5px solid #eadfe8; }
+  .card ul{ margin:0; padding-right:5mm; } .card li{ margin-bottom:1mm; font-size:11.5pt; }
+  .script{ background:var(--yellow); border-radius:4mm; padding:3mm 5mm; margin-bottom:4mm; font-size:11.5pt; }
+  .script q{ font-family:"Frank Ruhl Libre"; font-weight:500; font-size:12.5pt; quotes:"״" "״"; }
+  .key{ width:100%; border-collapse:collapse; font-size:11pt; margin-bottom:4mm; background:#fff; border-radius:4mm; overflow:hidden; }
+  .key th{ background:var(--orange); color:#fff; font-family:"Secular One"; font-weight:400; padding:2mm 3mm; text-align:right; font-size:12pt; }
+  .key td{ padding:2mm 3mm; border-bottom:1px solid #f0e6ea; vertical-align:top; }
+  .key td:first-child{ width:28mm; font-weight:800; color:var(--purple); }
+  .key tr:nth-child(even) td{ background:#fdf8fb; }
+  .t2 .key{ font-size:10.3pt; margin-bottom:3mm; } .t2 .key td{ padding:1.4mm 3mm; line-height:1.35; } .t2 h2{ font-size:14.5pt; margin-bottom:1.5mm; } .t2 .card{ padding:2.5mm 5mm; } .t2 .card li{ font-size:10.5pt; }
+  .map{ display:grid; grid-template-columns:1fr 1fr; gap:1.5mm 4mm; margin-bottom:3mm; } .map div{ background:#fff; border-radius:2.5mm; padding:1.5mm 3mm; font-size:10.5pt; display:flex; justify-content:space-between; gap:2mm; } .map b{ color:var(--orange-d); white-space:nowrap; }
+  .word{ display:inline-block; background:var(--purple); color:#fff; font-family:"Frank Ruhl Libre"; font-weight:700; padding:0 2.5mm; border-radius:1.5mm; }
+  .verse{ font-family:"Frank Ruhl Libre"; font-weight:700; color:var(--purple); font-size:14pt; }
+
+  /* cut sheets */
+  .cut{ border:2px dashed #b3a7ba; position:relative; }
+  .scissors{ font-size:10pt; color:var(--muted); margin:0 0 2mm; }
+  .glasses{ display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; margin-bottom:5mm; }
+  .gl{ background:#fff; border-radius:3mm; text-align:center; padding:3mm 2mm 2.5mm; }
+  .gl svg{ width:100%; height:15mm; }
+  .gl .lbl{ background:#BFE3EC; font-weight:800; font-size:12pt; border-radius:1.5mm; padding:1mm 1mm; margin-top:1.5mm; }
+  .arrows{ display:flex; flex-direction:column; gap:3mm; margin-bottom:5mm; }
+  .arw{ height:20mm; color:#fff; display:flex; align-items:center; padding:0 17mm 0 14mm;
+    clip-path:polygon(100% 0, 92% 50%, 100% 100%, 10mm 100%, 0 50%, 10mm 0); font-weight:700; font-size:13pt; line-height:1.3; }
+  .arw .l{ font-family:"Secular One"; font-size:20pt; margin-left:5mm; background:rgba(255,255,255,.25);
+    width:11mm; height:11mm; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
+  .arw-wrap{ border:2px dashed #b3a7ba; padding:1.2mm; background:#fff; }
+  .phone{ background:#fff; padding:0; display:grid; grid-template-rows:1fr 1fr; height:52mm; }
+  .phone > div{ display:flex; align-items:center; justify-content:center; text-align:center; padding:3mm 8mm; }
+  .phone .front{ border-bottom:2px dashed var(--orange); font-family:"Secular One"; color:var(--purple); font-size:17pt; flex-direction:column; }
+  .phone .front small{ font-family:"Assistant"; font-size:10.5pt; color:var(--muted); font-weight:600; }
+  .phone .back{ font-family:"Frank Ruhl Libre"; font-weight:700; font-size:16pt; line-height:1.5;  }
+
+  .codes{ display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-bottom:1.5mm; }
+  .code{ border:1.6px dashed #b3a7ba; background:#fff; height:24mm; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; margin:-0.8px; }
+  .code small{ font-size:8.5pt; color:var(--muted); font-weight:700; }
+  .code span{ font-family:"Frank Ruhl Libre"; font-weight:700; font-size:24pt; color:var(--purple); line-height:1.2; }
+  .grp{ font-size:9.5pt; color:var(--muted); font-weight:700; margin:2.5mm 0 1mm; }
+
+  .boxlabel{ background:var(--purple); color:#fff; border-radius:4mm; text-align:center; padding:4mm; margin-bottom:5mm; outline:2px dashed #b3a7ba; outline-offset:2mm; }
+  .boxlabel .big{ font-family:"Secular One"; font-size:30pt; line-height:1.1; }
+  .boxlabel .sm{ font-size:12pt; opacity:.9; }
+  .letters{ display:grid; grid-template-columns:1fr 1fr; gap:0; }
+  .letter{ border:1.6px dashed #b3a7ba; background:#fff; padding:4mm 5mm; height:52mm; margin:-0.8px; position:relative; }
+  .letter .to{ font-family:"Frank Ruhl Libre"; font-weight:700; color:var(--purple); font-size:13pt; }
+  .letter .sub{ font-size:10pt; color:var(--muted); margin-bottom:1mm; }
+  .letter .ln.w{ margin-top:6.5mm; }
+  .letter .nn{ position:absolute; bottom:3mm; left:5mm; font-size:9pt; color:var(--orange-d); font-weight:700; }
+  .flower{ position:absolute; top:3mm; left:4mm; font-size:15pt; }
+</style>
+</head>
+<body>
+
+<!-- ============ TEACHER PAGE 1 ============ -->
+<section class="page">
+  <div class="band"><div class="corner">ספר התניא קדישא · כיתה ז</div><div class="corner l">דף למורה</div>
+    <div class="tab">מסע לליאזנא<small>שיעור של 40 דקות · עבודה עצמאית בקבוצות</small></div></div>
+
+  <div class="intro"><b>הרעיון:</b> התלמידות לא קוראות על החסידים שעמדו בתור ליחידות, אלא חוות את זה בעצמן. כל קבוצה מנווטת לבד בחמש תחנות עם כרטיס ניווט, אוספת חמש מילות קוד ומגלה בסוף משפט סודי: <span class="verse">"כי קרוב אליך הדבר מאד"</span>. המסר שהן לוקחות איתן: <b>ספר התניא נכתב במיוחד בשבילי.</b></div>
+
+  <h2>מהלך השיעור</h2>
+  <table class="tl">
+    <tr><td>0–5</td><td><b>פתיחה: מכתב ליחידות.</b> כל תלמידה כותבת על פתק, בלי שם, שאלה שהייתה שואלת צדיק על עולמה הפנימי, ומכניסה ל"תיבת היחידות". המורה נכנסת לתפקיד הגבאית (ראו בהמשך העמוד).</td></tr>
+    <tr><td>5–33</td><td><b>המסע.</b> הקבוצות (4–5 תלמידות) מתחלקות בתפקידים ועוברות לבד את התחנות 1–5 ואת התחנה האחרונה. אחרי כל תחנה נציגה ניגשת להראות את התשובה ומקבלת <b>מילת קוד</b> שמדביקים בכרטיס. כ-5 דקות לתחנה.</td></tr>
+    <tr><td>33–40</td><td><b>סיום כיתתי.</b> בודקות יחד שהמשפט הסודי יצא נכון. המורה שולפת 1–2 פתקים מהתיבה ומראה איפה בתניא כבר כתובה תשובה (ראו את המפה בעמוד הבא). התיבה נסגרת עד סוף השנה, וכל אחת ממלאת את ההתחייבות שלה לחת"ת.</td></tr>
+  </table>
+
+  <div class="script">
+    <h3>תסריט לגבאית (דקה אחת)</h3>
+    <p><q>שקט, שקט! הרבי מליאזנא מודיע: היום יתקבלו ליחידות רק שלושה... כל השאר יחזרו בעוד כמה חודשים.</q></p>
+    <p><q>מה תעשה חסידה שבאה ממרחקים עם שאלה שבוערת לה בלב? ומה יעשה הרבי, שאלפים מחכים לו?</q></p>
+    <p style="margin:0"><q>צאו למסע ותגלו בעצמכן מה הוא עשה!</q></p>
+  </div>
+
+  <div class="cols">
+    <div class="card">
+      <h3>✂️ הכנה לכל קבוצה</h3>
+      <ul>
+        <li>כרטיס ניווט (2 עמודים, להדפיס דו-צדדי)</li>
+        <li>מעטפה ובה: 4 משקפיים, 4 חלקי החץ (מעורבבים), פתק "טלפון שבור" מקופל</li>
+        <li>ספר "תניא קדישא" (עמ' 18 ואילך) וספר תניא</li>
+        <li>דבק או סלוטייפ להדבקת מילות הקוד</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>📦 הכנה למורה</h3>
+      <ul>
+        <li>קופסה עם התווית "תיבת היחידות"</li>
+        <li>פתקי "מכתב ליחידות", אחד לכל תלמידה</li>
+        <li>דף מילות הקוד, גזור ומסודר לפי תחנות</li>
+        <li>מומלץ: לסמן מראש בתניא את הפרקים שבמפה</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--purple-l);border-color:var(--purple)">
+    <h3>🔑 מילות הקוד (זהות בכל הקבוצות)</h3>
+    <p style="margin:0">תחנה 1 ← <span class="word">הדבר</span> &nbsp; תחנה 2 ← <span class="word">כי</span> &nbsp; תחנה 3 ← <span class="word">מאד</span> &nbsp; תחנה 4 ← <span class="word">קרוב</span> &nbsp; תחנה 5 ← <span class="word">אליך</span><br>
+    <span style="font-size:10.5pt;color:var(--muted)">המילים מגיעות בסדר מבולבל, והקבוצה צריכה לסדר אותן לפסוק שעליו מיוסד ספר התניא (סוף מקור 4).</span></p>
+  </div>
+
+  <div class="foot"><b>1</b></div>
+</section>
+
+<!-- ============ TEACHER PAGE 2 — ANSWER KEY ============ -->
+<section class="page t2">
+  <div class="band"><div class="corner">ספר התניא קדישא · כיתה ז</div><div class="corner l">דף למורה</div>
+    <div class="tab">תשובות ומפה<small>לבדיקה מהירה בתחנות</small></div></div>
+
+  <h2>מפתח תשובות</h2>
+  <table class="key">
+    <tr><th>תחנה</th><th>מה מחפשים בתשובה</th></tr>
+    <tr><td>1 · משקפיים</td><td>מי שלא יצליח להבין לבד מספר: <b>אדם מבולבל</b> ו<b>אדם שדעתו קצרה</b>. מי שכן יצליח: <b>עובד ה' אמיתי</b>. אדם רגיל יבין רק "לפי דרכו ודעתו". המקור: הקורא קורא "לפי השגת ותפיסת שכלו", ומי שמבולבל "בקושי יכול לראות את האור". על השאלה איזו דרך הן מעדיפות אין תשובה אחת נכונה, העיקר שינמקו.</td></tr>
+    <tr><td>2 · החץ</td><td>הסדר: <b>א ← ג ← ב ← ד</b>. (א) אנשים רבים באו לשאול ביחידות; (ג) אדמו"ר הזקן ענה לכל אחד לפי ערכו; (ב) קוצר הזמן לא איפשר לענות לכל אחד באופן אישי; (ד) הוא ליקט את כל התשובות לספר.<br>
+    שתי הסיבות: <b>א.</b> "אין הזמן גרמא" להשיב לכל אחד ואחד. <b>ב.</b> שיהיה "לכל אחד ואחד לזכרון בין עיניו", ולא יצטרכו עוד להידחק ליחידות, כי בספר ימצאו עצה לכל דבר.</td></tr>
+    <tr><td>3 · טלפון שבור</td><td>"טעויות סופרים": מילים שהשתבשו כשהעתיקו את הקונטרסים שוב ושוב בידי סופרים שונים. הדפוס יוצר נוסח אחד, מדויק ו"מוגה היטב", זהה אצל כולם. אפשר לחבר לציטוט של הריי"צ: בתניא כל מילה, ואפילו כל אות, מדויקת.</td></tr>
+    <tr><td>4 · ספר של יחידות</td><td>שלושה דברים: <b>א.</b> הלומד נעשה מ"יודעיי ומכיריי" של אדמו"ר הזקן. <b>ב.</b> הוא מוצא בתניא תשובה ועצה לכל שאלה שלו בעבודת ה'. <b>ג.</b> גם כשהוא "בחשיכה", אדמו"ר הזקן מאיר לו את הדרך, כי "קרוב אליך הדבר מאד".<br>
+    ההשלמה: ספר של <b>יחידות</b>, כי הוא מחליף את הפגישה האישית עם הרבי, וכל אחת מוצאת בו תשובה בשבילה.</td></tr>
+    <tr><td>5 · כמו חומש</td><td>הרא"ש אמר בחלום שספר התניא מכוון כנגד חמשה חומשי תורה, וכל פרק כנגד פרשה. <b>הקדמת המלקט</b> מכוונת כנגד <b>פרשת בראשית</b>, כי שתיהן כלליות.</td></tr>
+    <tr><td>אחרונה</td><td>המשפט הסודי: <span class="verse">כי קרוב אליך הדבר מאד</span> (ההמשך בפסוק: "בפיך ובלבבך לעשותו").</td></tr>
+  </table>
+
+  <h2>"התשובה כבר כתובה": מפה לסיום</h2>
+  <p style="font-size:11pt;color:var(--muted);margin-bottom:2mm">שולפים פתק מהתיבה ומראים לתלמידות שהרבי כבר ענה עליו:</p>
+  <div class="map"><div><span>"עולות לי מחשבות לא טובות"</span><b>פרק יב, פרק כז</b></div><div><span>"קשה לי להתרכז בתפילה"</span><b>פרק כח, פרק מא</b></div><div><span>"אני עצובה / לא בשמחה"</span><b>פרק כו, פרק לא</b></div><div><span>"קשה לי לאהוב מישהי בכיתה"</span><b>פרק לב</b></div><div><span>"אני שופטת אחרים"</span><b>פרק ל</b></div><div><span>"זה רחוק ממני, אני לא מסוגלת"</span><b>פרק יד, פרק יז ("כי קרוב")</b></div></div>
+
+  <div class="card">
+    <h3>🏠 משימת בית (מה שלא נכנס לשיעור)</h3>
+    <ul>
+      <li><b>מבנה התניא</b> (שאלה 6): לדפדף בספר תניא ולהשלים את שמות חמשת החלקים ואת מספר הפרקים בכל אחד.</li>
+      <li><b>מפת הדפוסים:</b> לבדוק בבית איפה הודפס התניא, ולחפש ב"רשימת הדפוסים" שבסוף הספר מקום מיוחד. בשיעור הבא מסמנים את המקומות על מפת עולם בכיתה.</li>
+    </ul>
+  </div>
+  <div class="foot"><b>2</b></div>
+</section>
+
+<!-- ============ NAV CARD PAGE 1 ============ -->
+<section class="page">
+  <div class="band"><div class="corner">כרטיס ניווט · עמוד 1</div><div class="corner l">קבוצה: ____________</div>
+    <div class="tab">מסע לליאזנא<small>ספר התניא קדישא · הקדמת המלקט</small></div></div>
+
+  <div class="intro">🧭 <b>יוצאות לדרך!</b> עברו את כל התחנות לפי הסדר. בסוף כל תחנה הראו למורה את התשובה וקבלו <b>מילת קוד</b>. הדביקו אותה במקום המסומן. בסוף המסע תגלו את המשפט הסודי!</div>
+
+  <div class="roles">
+    <div class="role"><b>📖 קוראת</b>מקריאה את המקורות<span class="nm"></span></div>
+    <div class="role"><b>✏️ כותבת</b>ממלאת את הכרטיס<span class="nm"></span></div>
+    <div class="role"><b>⏱️ מנווטת</b>5 דקות לכל תחנה<span class="nm"></span></div>
+    <div class="role"><b>✉️ אחראית מעטפה</b>חומרים ומילות קוד<span class="nm"></span></div>
+  </div>
+
+  <div class="station">
+    <div class="num">1</div>
+    <h3>למה לא מספיק לקרוא ספר? <span class="src">מקור 1</span></h3>
+    <ol>
+      <li>כל אחת שולפת מהמעטפה <b>משקפיים</b> ונכנסת לתפקיד.</li>
+      <li>הקוראת מקריאה את מקור 1. כל אחת אומרת, מתוך התפקיד שלה: "האם <u>אני</u> אבין מהספר מה לעשות?"</li>
+      <li>סמנו ✓ ליד מי שתצליח להבין לבד:
+        <div class="checks"><span><span class="box"></span>אדם רגיל</span><span><span class="box"></span>אדם מבולבל</span><span><span class="box"></span>אדם שדעתו קצרה</span><span><span class="box"></span>עובד ה' אמיתי</span></div></li>
+      <li>ואתן? מה הייתן מעדיפות, לשמוע מהרבי או לקרוא בספר? למה? <span class="ln w"></span></li>
+    </ol>
+    <div class="stamp"><div class="hand">✋</div><div class="t">הראו למורה<br>וקבלו מילת קוד</div><div class="slot">הדביקו כאן</div></div>
+  </div>
+
+  <div class="station">
+    <div class="num">2</div>
+    <h3>למה נכתב התניא? <span class="src">מקור 2</span></h3>
+    <ol>
+      <li>הקוראת מקריאה את מקור 2 (שימו לב למילים המוסברות מתחתיו ⭐).</li>
+      <li>הוציאו מהמעטפה את <b>4 חלקי החץ</b> וסדרו אותם על השולחן לפי סדר הדברים.<br>
+        הסדר שלנו: <span class="ln" style="min-width:12mm"></span> ← <span class="ln" style="min-width:12mm"></span> ← <span class="ln" style="min-width:12mm"></span> ← <span class="ln" style="min-width:12mm"></span></li>
+      <li>שתי הסיבות שבגללן כתב אדמו"ר הזקן את התניא:<br>
+        א. <span class="ln" style="min-width:110mm"></span><br>ב. <span class="ln" style="min-width:110mm;margin-top:3mm"></span></li>
+    </ol>
+    <div class="stamp"><div class="hand">✋</div><div class="t">הראו למורה<br>וקבלו מילת קוד</div><div class="slot">הדביקו כאן</div></div>
+  </div>
+
+  <div class="station">
+    <div class="num">3</div>
+    <h3>הטלפון השבור <span class="src">מקור 3</span></h3>
+    <ol>
+      <li>אחראית המעטפה פותחת את <b>הפתק המקופל</b>, קוראת אותו לבד ולוחשת לחברה שלידה. כל אחת לוחשת הלאה, והאחרונה אומרת את המשפט בקול.</li>
+      <li>השוו לפתק. מה השתנה בדרך? <span class="ln" style="min-width:95mm"></span></li>
+      <li>קראו את מקור 3. כך בדיוק קרה לקונטרסים. איך הדפוס פתר את הבעיה?<span class="ln w"></span></li>
+    </ol>
+    <div class="stamp"><div class="hand">✋</div><div class="t">הראו למורה<br>וקבלו מילת קוד</div><div class="slot">הדביקו כאן</div></div>
+  </div>
+
+  <div class="foot">ממשיכות לעמוד 2 ←</div>
+</section>
+
+<!-- ============ NAV CARD PAGE 2 ============ -->
+<section class="page p2">
+  <div class="band"><div class="corner">כרטיס ניווט · עמוד 2</div><div class="corner l">קבוצה: ____________</div>
+    <div class="tab">מסע לליאזנא<small>ממשיכות במסע</small></div></div>
+
+  <div class="station">
+    <div class="num">4</div>
+    <h3>ספר של יחידות <span class="src">מקור 4 + "מה חידש ספר התניא?"</span></h3>
+    <ol>
+      <li>הקוראת מקריאה את מקור 4 ואת המסגרת "מה חידש ספר התניא?".</li>
+      <li>שלושה דברים שזוכה בהם מי שלומדת תניא:<br>
+        א. <span class="ln" style="min-width:110mm"></span><br>
+        ב. <span class="ln" style="min-width:110mm;margin-top:3mm"></span><br>
+        ג. <span class="ln" style="min-width:110mm;margin-top:3mm"></span></li>
+      <li>השלימו: "ספר התניא הוא ספר של <span class="ln" style="min-width:25mm"></span>, כי..."<span class="ln w"></span></li>
+    </ol>
+    <div class="stamp"><div class="hand">✋</div><div class="t">הראו למורה<br>וקבלו מילת קוד</div><div class="slot">הדביקו כאן</div></div>
+  </div>
+
+  <div class="station">
+    <div class="num">5</div>
+    <h3>התניא כמו חומש <span class="src">מסע עם חסידים + הפתקים הצבעוניים</span></h3>
+    <ol>
+      <li>קראו את הסיפור על ר' זלמן זעזמער. מה אמר לו הרא"ש בחלום?<span class="ln w"></span></li>
+      <li>איזה חלק בתניא מכוון כנגד פרשת בראשית? <span class="ln" style="min-width:55mm"></span></li>
+      <li>קראו יחד <b>בקול</b> את שלושת הפתקים הצבעוניים, ובמקום "תורה" אמרו "<b>תניא</b>". איזה משפט הכי הפתיע אתכן? <span class="ln w"></span></li>
+    </ol>
+    <div class="stamp"><div class="hand">✋</div><div class="t">הראו למורה<br>וקבלו מילת קוד</div><div class="slot">הדביקו כאן</div></div>
+  </div>
+
+  <div class="station final" style="padding-left:5mm">
+    <div class="num">🏁</div>
+    <h3>התחנה האחרונה: המשפט הסודי</h3>
+    <p>סדרו את 5 מילות הקוד למשפט. רמז: הוא מופיע בסוף מקור 4, וכל ספר התניא מיוסד עליו!</p>
+    <div class="slots5"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="quiet">
+      <p style="margin-bottom:1mm">🤫 <b>עכשיו כל אחת לבד, בשקט:</b> מה זה אומר עליי, ש"קרוב אליי הדבר מאד"?</p>
+      <p style="margin-bottom:1mm"><b>משפט אחד מהיום שאני לוקחת איתי:</b><span class="ln w" style="margin-top:6mm"></span></p>
+      <p style="margin:3mm 0 0"><b>ההתחייבות שלי לשיעור התניא היומי בחת"ת:</b><br>
+        <span class="box"></span>אלמד כל יום &nbsp;&nbsp; <span class="box"></span>אלמד עם חברותא: <span class="ln" style="min-width:35mm"></span> &nbsp; <span class="box"></span>אחר: <span class="ln" style="min-width:30mm"></span></p>
+    </div>
+  </div>
+
+  <div class="foot" style="font-family:'Secular One';color:var(--orange-d);font-size:15pt">דרך צלחה!!!</div>
+</section>
+
+<!-- ============ ENVELOPE CUT SHEET ============ -->
+<section class="page">
+  <div class="band"><div class="corner">חומרים לגזירה</div><div class="corner l">דף אחד לכל קבוצה</div>
+    <div class="tab">תוכן המעטפה<small>לגזור לאורך הקווים המקווקווים</small></div></div>
+
+  <div class="pill">משקפיים <span class="o">לתחנה 1</span></div>
+  <div class="glasses">
+    <div class="gl cut">
+      <svg viewBox="0 0 120 44"><g fill="none" stroke="#A86A3D" stroke-width="5" stroke-linejoin="round"><path d="M6 8 H52 V26 Q52 38 34 38 H22 Q6 38 6 24 Z"/><path d="M68 8 H114 V24 Q114 38 98 38 H86 Q68 38 68 26 Z"/><path d="M52 14 Q60 8 68 14"/></g></svg>
+      <div class="lbl">עובד ה' אמיתי</div></div>
+    <div class="gl cut">
+      <svg viewBox="0 0 120 44"><g fill="none" stroke="#1E8C86" stroke-width="5" stroke-linejoin="round"><rect x="6" y="8" width="46" height="28" rx="12"/><rect x="68" y="8" width="46" height="28" rx="12"/><path d="M52 16 Q60 10 68 16"/></g></svg>
+      <div class="lbl">אדם שדעתו קצרה</div></div>
+    <div class="gl cut">
+      <svg viewBox="0 0 120 44"><g fill="none" stroke="#9AA0A4" stroke-width="5" stroke-linejoin="round"><rect x="6" y="8" width="46" height="28" rx="5"/><rect x="68" y="8" width="46" height="28" rx="5"/><path d="M52 15 H68"/></g></svg>
+      <div class="lbl">אדם מבולבל</div></div>
+    <div class="gl cut">
+      <svg viewBox="0 0 120 44"><g fill="none" stroke="#E0344B" stroke-width="5" stroke-linejoin="round"><path d="M4 6 Q30 4 52 12 Q52 38 30 38 Q8 38 4 6 Z"/><path d="M116 6 Q90 4 68 12 Q68 38 90 38 Q112 38 116 6 Z"/><path d="M52 15 Q60 9 68 15"/></g></svg>
+      <div class="lbl">אדם רגיל</div></div>
+  </div>
+
+  <div class="pill">חלקי החץ <span class="o">לתחנה 2</span></div>
+  <div class="arrows">
+    <div class="arw-wrap"><div class="arw" style="background:var(--green)"><span class="l">ב</span>קוצר הזמן לא אפשר לאדמו"ר הזקן לענות לכל אחד באופן אישי.</div></div>
+    <div class="arw-wrap"><div class="arw" style="background:var(--red)"><span class="l">ד</span>אדמו"ר הזקן ליקט את כל התשובות בעבודת ה' לספר התניא.</div></div>
+    <div class="arw-wrap"><div class="arw" style="background:var(--blue)"><span class="l">א</span>אנשים רבים הגיעו לשאול את הרבי ביחידות שאלות בעבודת ה'.</div></div>
+    <div class="arw-wrap"><div class="arw" style="background:var(--amber)"><span class="l">ג</span>אדמו"ר הזקן ענה על כל השאלות באופן אישי, לכל אדם לפי ערכו והבנתו.</div></div>
+  </div>
+
+  <div class="pill">פתק סודי <span class="o">לתחנה 3</span></div>
+  <div class="phone cut">
+    <div class="front">🤫 טלפון שבור<small>לקפל לאורך הקו הכתום. רק אחראית המעטפה פותחת!</small></div>
+    <div class="back">"כִּי בָּהֶן יִמְצָא מַרְגּוֹעַ לְנַפְשׁוֹ וְעֵצָה נְכוֹנָה לְכָל דָּבָר הַקָּשֶׁה עָלָיו בַּעֲבוֹדַת ה'"</div>
+  </div>
+</section>
+
+<!-- ============ CODE WORDS ============ -->
+<section class="page">
+  <div class="band"><div class="corner">דף למורה · לגזירה</div><div class="corner l">שורה אחת לכל קבוצה</div>
+    <div class="tab">מילות הקוד<small>מחלקים לקבוצה אחרי שהראתה תשובה בתחנה</small></div></div>
+  <p style="font-size:11pt;color:var(--muted);margin-bottom:1mm">💡 טיפ: לגזור לפי טורים ולשמור כל טור בערימה או בכוס נפרדת, "תחנה 1", "תחנה 2" וכן הלאה, כדי לחלק מהר.</p>
+  <!-- 7 groups -->
+  <div class="grp">קבוצה 1</div>
+  <div class="codes"><div class="code"><small>תחנה 1</small><span>הדבר</span></div><div class="code"><small>תחנה 2</small><span>כי</span></div><div class="code"><small>תחנה 3</small><span>מאד</span></div><div class="code"><small>תחנה 4</small><span>קרוב</span></div><div class="code"><small>תחנה 5</small><span>אליך</span></div></div>
+  <div class="grp">קבוצה 2</div>
+  <div class="codes"><div class="code"><small>תחנה 1</small><span>הדבר</span></div><div class="code"><small>תחנה 2</small><span>כי</span></div><div class="code"><small>תחנה 3</small><span>מאד</span></div><div class="code"><small>תחנה 4</small><span>קרוב</span></div><div class="code"><small>תחנה 5</small><span>אליך</span></div></div>
+  <div class="grp">קבוצה 3</div>
+  <div class="codes"><div class="code"><small>תחנה 1</small><span>הדבר</span></div><div class="code"><small>תחנה 2</small><span>כי</span></div><div class="code"><small>תחנה 3</small><span>מאד</span></div><div class="code"><small>תחנה 4</small><span>קרוב</span></div><div class="code"><small>תחנה 5</small><span>אליך</span></div></div>
+  <div class="grp">קבוצה 4</div>
+  <div class="codes"><div class="code"><small>תחנה 1</small><span>הדבר</span></div><div class="code"><small>תחנה 2</small><span>כי</span></div><div class="code"><small>תחנה 3</small><span>מאד</span></div><div class="code"><small>תחנה 4</small><span>קרוב</span></div><div class="code"><small>תחנה 5</small><span>אליך</span></div></div>
+  <div class="grp">קבוצה 5</div>
+  <div class="codes"><div class="code"><small>תחנה 1</small><span>הדבר</span></div><div class="code"><small>תחנה 2</small><span>כי</span></div><div class="code"><small>תחנה 3</small><span>מאד</span></div><div class="code"><small>תחנה 4</small><span>קרוב</span></div><div class="code"><small>תחנה 5</small><span>אליך</span></div></div>
+  <div class="grp">קבוצה 6</div>
+  <div class="codes"><div class="code"><small>תחנה 1</small><span>הדבר</span></div><div class="code"><small>תחנה 2</small><span>כי</span></div><div class="code"><small>תחנה 3</small><span>מאד</span></div><div class="code"><small>תחנה 4</small><span>קרוב</span></div><div class="code"><small>תחנה 5</small><span>אליך</span></div></div>
+  <div class="grp">קבוצה 7</div>
+  <div class="codes"><div class="code"><small>תחנה 1</small><span>הדבר</span></div><div class="code"><small>תחנה 2</small><span>כי</span></div><div class="code"><small>תחנה 3</small><span>מאד</span></div><div class="code"><small>תחנה 4</small><span>קרוב</span></div><div class="code"><small>תחנה 5</small><span>אליך</span></div></div>
+</section>
+
+<!-- ============ LETTERS + BOX LABEL ============ -->
+<section class="page">
+  <div class="band"><div class="corner">לפתיחת השיעור</div><div class="corner l">פתק לכל תלמידה</div>
+    <div class="tab">מכתב ליחידות<small>להדפיס לפי מספר התלמידות</small></div></div>
+
+  <div class="boxlabel"><div class="big">📮 תיבת היחידות</div><div class="sm">ייפתח בסוף השנה, ונגלה כמה תשובות כבר מצאנו בתניא</div></div>
+
+  <div class="letters">
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+    <div class="letter"><span class="flower">🌸</span><div class="to">לכבוד אדמו"ר הזקן,</div><div class="sub">שאלה שהייתי רוצה לשאול ביחידות, על העולם הפנימי שלי:</div><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><div class="nn">בלי שם · לקפל ולהכניס לתיבה</div></div>
+  </div>
+</section>
+
+</body>
+</html>

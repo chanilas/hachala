@@ -88,7 +88,7 @@
   .st p b{ color:var(--teal); }
   .grid{ width:100%; border-collapse:collapse; background:#fff; font-size:10.5pt; margin-bottom:4mm; table-layout:fixed; }
   .grid th{ background:var(--teal); color:#fff; font-family:"Secular One"; font-weight:400; padding:1.8mm 2mm; font-size:11pt; }
-  .grid td{ border:1.2px solid #cfe5e2; height:15mm; padding:1.5mm 2mm; vertical-align:top; }
+  .grid td{ border:1.2px solid #cfe5e2; height:24mm; padding:1.5mm 2mm; vertical-align:top; }
   .grid td:first-child{ background:var(--teal-l); font-weight:800; color:var(--teal); width:24mm; vertical-align:middle; text-align:center; }
   .riddle{ display:flex; gap:4mm; align-items:center; background:var(--purple-l); border:2px solid var(--purple); border-radius:5mm; padding:3mm 5mm; margin-bottom:4mm; }
   .tiles{ display:flex; gap:1.5mm; direction:rtl; flex:none; }
@@ -111,6 +111,14 @@
   .key th{ background:var(--orange); color:#fff; font-family:"Secular One"; font-weight:400; padding:1.6mm 3mm; text-align:right; }
   .key td{ padding:1.6mm 3mm; border-bottom:1px solid #f0e6ea; vertical-align:top; }
   .key td:first-child{ width:9mm; font-weight:800; color:var(--purple); text-align:center; }
+  .sign .band .tab{ font-size:40pt; padding:4mm 22mm 6mm; }
+  .sign .band{ height:24mm; margin-bottom:24mm; }
+  .sbody{ display:flex; flex-direction:column; gap:7mm; }
+  .sstep{ background:#fff; border-radius:6mm; border:2px solid #eadfe8; padding:6mm 8mm; font-size:21pt; line-height:1.35; font-weight:600; }
+  .sstep b{ color:var(--teal); font-size:24pt; margin-left:2mm; }
+  .sstep.last{ background:var(--yellow); border-color:var(--yellow); font-size:17pt; }
+  .sart{ background:#fff; border-radius:6mm; border:2px solid #eadfe8; padding:8mm; display:flex; justify-content:center; }
+  .sart svg{ width:150mm; height:auto; }
 </style>
 </head>
 <body>
@@ -169,30 +177,18 @@
   <div class="band"><div class="corner">ספר התניא קדישא</div><div class="corner l">שם: ________________</div>
     <div class="tab">מעבדת העין<small>האם אפשר לסמוך על מה שרואים?</small></div></div>
 
-  <div class="intro">🔬 <b>את החוקרת.</b> בכל תחנה: קודם מסתכלים ורושמים מה <b>רואים</b>, ורק אחר כך בודקים מה <b>באמת</b> יש. אסור לדלג על השלב הראשון!</div>
-
-  <div class="stations">
-    <div class="st"><div class="n">1</div><h3>הקשית במים</h3>
-      <div class="vis"><svg viewBox="0 0 80 100"><path d="M18 30 L22 96 H58 L62 30" fill="#DDF1EF" stroke="#2F8F8A" stroke-width="2.5"/><path d="M18 30 H62" stroke="#2F8F8A" stroke-width="2.5"/><rect x="19.5" y="44" width="41" height="51" fill="#9FD6E8" opacity=".7"/><line x1="58" y1="4" x2="44" y2="46" stroke="#E0344B" stroke-width="5" stroke-linecap="round"/><line x1="38" y1="46" x2="30" y2="88" stroke="#E0344B" stroke-width="5" stroke-linecap="round"/></svg></div>
-      <p>הסתכלי על הקשית בכוס מהצד. <b>בדיקה:</b> הוציאי אותה מהמים.</p></div>
-    <div class="st"><div class="n">2</div><h3>שני הקווים</h3>
-      <div class="vis"><svg viewBox="0 0 120 70"><g stroke="#5E3F70" stroke-width="2.6" fill="none" stroke-linecap="round">
-        <line x1="25" y1="18" x2="95" y2="18"/><path d="M25 18 l9 -8 M25 18 l9 8 M95 18 l-9 -8 M95 18 l-9 8"/>
-        <line x1="25" y1="52" x2="95" y2="52"/><path d="M25 52 l-9 -8 M25 52 l-9 8 M95 52 l9 -8 M95 52 l9 8"/></g>
-        <text x="110" y="22" font-size="9" fill="#C9673F" font-weight="700">א</text><text x="4" y="56" font-size="9" fill="#C9673F" font-weight="700">ב</text></svg></div>
-      <p>איזה קו ארוך יותר, א' או ב'? <b>בדיקה:</b> מדדי את שניהם בסרגל.</p></div>
-    <div class="st"><div class="n">3</div><h3>הפס האפור</h3>
-      <div class="vis"><svg viewBox="0 0 120 60"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#111"/><stop offset="1" stop-color="#f4f4f4"/></linearGradient></defs>
-        <rect x="0" y="0" width="120" height="60" rx="4" fill="url(#g)"/><rect x="8" y="24" width="104" height="12" fill="#8a8a8a"/></svg></div>
-      <p>האם הפס בצבע אחיד? <b>בדיקה:</b> כסי את הרקע בשני דפים, כך שרק הפס יישאר גלוי.</p></div>
-  </div>
+  <div class="intro">🔬 <b>את החוקרת.</b> קומי ועברי בין שלוש התחנות שבכיתה. בכל תחנה:<br>
+  <b>①</b> קודם מסתכלים ורושמים מה <b>רואים</b>. &nbsp; <b>②</b> רק אחר כך מבצעים את הבדיקה שכתובה על התחנה. &nbsp; <b>③</b> רושמים מה <b>באמת</b> יש.<br>
+  אסור לדלג על השלב הראשון!</div>
 
   <table class="grid">
     <tr><th style="width:24mm">התחנה</th><th>מה ראיתי?</th><th>מה באמת יש?</th><th>מה הסתיר ממני את האמת?</th></tr>
-    <tr><td>1 · הקשית</td><td></td><td></td><td></td></tr>
-    <tr><td>2 · הקווים</td><td></td><td></td><td></td></tr>
-    <tr><td>3 · הפס</td><td></td><td></td><td></td></tr>
+    <tr><td>תחנה 1</td><td></td><td></td><td></td></tr>
+    <tr><td>תחנה 2</td><td></td><td></td><td></td></tr>
+    <tr><td>תחנה 3</td><td></td><td></td><td></td></tr>
   </table>
+
+  <p style="font-size:11pt;margin:-1mm 0 4mm">🔎 <b style="color:var(--teal)">מה משותף לשלוש התחנות?</b><span class="ln w"></span></p>
 
   <div class="riddle">
     <div class="tiles"><span>ע</span><span>ו</span><span>ל</span><span>ם</span><span class="eq">≈</span><span class="e"></span><span class="e"></span><span class="e"></span><span class="e"></span></div>
@@ -203,7 +199,7 @@
 
   <div class="hyp">
     <h3>💡 ההשערה שלי לשיעור הבא</h3>
-    <p style="font-size:11pt">בשיעור הקודם למדנו שבכל דבר יש כח אלוקי שמהווה אותו בכל רגע מחדש.<br><b>אם כך, למה אנחנו לא רואים אותו?</b> מה ה"מים", ה"חצים" או ה"רקע" של העולם כולו?</p>
+    <p style="font-size:11pt">בשיעור הקודם למדנו שבכל דבר יש כח אלוקי שמהווה אותו בכל רגע מחדש.<br><b>אם כך, למה אנחנו לא רואים אותו?</b> מה יכול להסתיר את האמת בעולם כולו, כמו שבכל תחנה משהו הסתיר את האמת?</p>
     <span class="ln w"></span><span class="ln w"></span><span class="ln w"></span>
     <p style="margin:3mm 0 0;font-size:10pt;color:var(--muted)">שם: ______________ · בשיעור הבא נפתח את המעטפה ונבדוק את ההשערות מול התניא.</p>
   </div>
@@ -212,7 +208,7 @@
 <!-- ============ TEACHER ============ -->
 <section class="page">
   <div class="band"><div class="corner">ספר התניא קדישא · יש מאין</div><div class="corner l">דף למורה</div>
-    <div class="tab">הנחיות ותשובות<small>לשני דפי העבודה</small></div></div>
+    <div class="tab">הנחיות ותשובות<small>לשני דפי העבודה ולשלטי התחנות</small></div></div>
 
   <h2>דף 1 · גם וגם</h2>
   <table class="key" style="margin-bottom:3mm">
@@ -229,13 +225,48 @@
   <h2>דף 2 · מעבדת העין</h2>
   <div class="card">
     <ul>
-      <li><b>הכנה:</b> לתחנה 1 צריך כוס שקופה עם מים וקשית. את תחנות 2–3 התלמידות עושות על הדף עצמו, וצריך רק סרגל ושני דפים לכיסוי. <b>חשוב:</b> להדפיס בצבע עם "גרפיקת רקע", אחרת המעבר מכהה לבהיר ברקע של תחנה 3 לא יודפס.</li>
+      <li><b>הכנה:</b> מציבים בכיתה שלוש תחנות עם השלטים שבעמודים הבאים. <b>תחנה 1:</b> כוס שקופה עם מים וקשית. <b>תחנה 2:</b> השלט עם שני הקווים וסרגל. <b>תחנה 3:</b> השלט עם הפס האפור ושני דפים לבנים לכיסוי. בדף העבודה התחנות מופיעות רק כמספרים, כדי שהבנות יגלו בעצמן מה בכל תחנה. <b>חשוב:</b> את שלט תחנה 3 מדפיסים בצבע עם "גרפיקת רקע", אחרת המעבר מכהה לבהיר ברקע לא יודפס.</li>
       <li><b>אם אין כוס בכיתה:</b> תחנה 1 חלופית היא להחזיק אצבע מול העיניים ולעצום כל פעם עין אחרת. האצבע "קופצת", אבל לא זזה.</li>
       <li><b>תשובות:</b> (1) הקשית נראית שבורה, אבל היא ישרה. המים הסתירו. (2) שני הקווים שווים באורכם, החצים הטעו. (3) הפס כולו בגוון אפור אחד, הרקע הטעה.</li>
       <li><b>חידת המילה:</b> <b>העלם</b>. העולם מסתיר את החיות האלוקית שמהווה אותו (השיחה של הרבי לפרשת ראה, ביחידת אחדות ה').</li>
       <li><b>המעטפה:</b> בשיעור הבא קוראים כמה השערות ומשווים אותן לשער היחוד והאמונה, פרק ג: "אילו ניתנה רשות לעין לראות...".</li>
       <li><b>שימי לב:</b> בכוונה לא השתמשתי במשולש של קניזסה ובתרגיל הכביש, כי הם מופיעים ביחידת אחדות ה' בספר, וכך הם יישארו מפתיעים לשיעור עצמו.</li>
     </ul>
+  </div>
+</section>
+
+<!-- ============ STATION SIGNS ============ -->
+<section class="page sign">
+  <div class="band"><div class="corner">מעבדת העין</div><div class="corner l">שלט לתחנה</div><div class="tab">תחנה 1</div></div>
+  <div class="sbody">
+    <div class="sstep"><b>①</b> הסתכלי על הקשית שבכוס <u>מהצד</u>, בגובה העיניים. רשמי בטבלה מה את רואה.</div>
+    <div class="sstep"><b>②</b> בדיקה: הוציאי את הקשית מהמים והסתכלי עליה.</div>
+    <div class="sstep"><b>③</b> רשמי מה באמת יש, ומה הסתיר ממך את האמת.</div>
+    <div class="sstep last">החזירי את הקשית לכוס בשביל החוקרת הבאה 🙂</div>
+  </div>
+</section>
+
+<section class="page sign">
+  <div class="band"><div class="corner">מעבדת העין</div><div class="corner l">שלט לתחנה</div><div class="tab">תחנה 2</div></div>
+  <div class="sbody">
+    <div class="sstep"><b>①</b> איזה קו ארוך יותר, א' או ב'? רשמי בטבלה מה את רואה.</div>
+    <div class="sart"><svg viewBox="0 0 220 130"><g stroke="#5E3F70" stroke-width="3.5" fill="none" stroke-linecap="round">
+      <line x1="45" y1="32" x2="175" y2="32"/><path d="M45 32 l15 -13 M45 32 l15 13 M175 32 l-15 -13 M175 32 l-15 13"/>
+      <line x1="45" y1="100" x2="175" y2="100"/><path d="M45 100 l-15 -13 M45 100 l-15 13 M175 100 l15 -13 M175 100 l15 13"/></g>
+      <text x="200" y="38" font-size="16" fill="#C9673F" font-weight="700" font-family="Assistant">א</text><text x="6" y="106" font-size="16" fill="#C9673F" font-weight="700" font-family="Assistant">ב</text></svg></div>
+    <div class="sstep"><b>②</b> בדיקה: מדדי את שני הקווים בסרגל, בלי החצים.</div>
+    <div class="sstep"><b>③</b> רשמי מה באמת יש, ומה הסתיר ממך את האמת.</div>
+  </div>
+</section>
+
+<section class="page sign">
+  <div class="band"><div class="corner">מעבדת העין</div><div class="corner l">שלט לתחנה</div><div class="tab">תחנה 3</div></div>
+  <div class="sbody">
+    <div class="sstep"><b>①</b> האם הפס שבאמצע בצבע אחיד, או שהוא משתנה מצד לצד? רשמי בטבלה מה את רואה.</div>
+    <div class="sart"><svg viewBox="0 0 220 120"><defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#111"/><stop offset="1" stop-color="#f4f4f4"/></linearGradient></defs>
+      <rect x="0" y="0" width="220" height="120" rx="6" fill="url(#g2)"/><rect x="12" y="50" width="196" height="20" fill="#8a8a8a"/></svg></div>
+    <div class="sstep"><b>②</b> בדיקה: כסי את הרקע מעל הפס ומתחתיו בשני הדפים הלבנים, כך שרק הפס יישאר גלוי.</div>
+    <div class="sstep"><b>③</b> רשמי מה באמת יש, ומה הסתיר ממך את האמת.</div>
   </div>
 </section>
 

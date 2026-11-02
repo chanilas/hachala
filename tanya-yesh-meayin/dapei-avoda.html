@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>דפי עבודה יש מאין</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&family=Secular+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#E8906A; --orange-d:#C9673F; --purple:#5E3F70; --purple-l:#EFE6F4;
+    --cream:#FFFBEA; --ink:#2E2433; --muted:#7A6E80; --yellow:#FBEFA0;
+    --teal:#2F8F8A; --teal-l:#DDF1EF; --pink:#F3C9C0; --line:#B9A9C2;
+  }
+  @page{ size:A4; margin:0; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#e9e4ec; color:var(--ink);
+    font-family:"Assistant",sans-serif; font-size:12pt; line-height:1.42;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page{ width:210mm; height:297mm; margin:10mm auto; background:var(--cream);
+    position:relative; overflow:hidden; break-after:page; padding:0 14mm 12mm; }
+  .page:last-child{ break-after:auto; }
+  @media print{ html,body{ background:none; } .page{ margin:0; } }
+
+  .band{ margin:0 -14mm 6mm; height:20mm; background:var(--orange); position:relative; }
+  .band .tab{ position:absolute; top:0; left:50%; transform:translateX(-50%);
+    background:var(--purple); color:#fff; padding:3.5mm 12mm 4.5mm; border-radius:0 0 7mm 7mm;
+    font-family:"Secular One"; font-size:22pt; line-height:1.1; text-align:center; white-space:nowrap;
+    box-shadow:0 2mm 0 rgba(0,0,0,.08); }
+  .band .tab small{ display:block; font-family:"Assistant"; font-weight:600; font-size:10.5pt; opacity:.85; margin-top:1mm; }
+  .band .corner{ position:absolute; top:6mm; right:14mm; color:#fff; font-weight:800; font-size:10.5pt; }
+  .band .corner.l{ right:auto; left:14mm; }
+
+  h2{ font-family:"Secular One"; font-weight:400; color:var(--purple); font-size:15pt; margin:0 0 2mm; }
+  h3{ font-family:"Secular One"; font-weight:400; color:var(--purple); font-size:13pt; margin:0 0 1.5mm; }
+  p{ margin:0 0 1.8mm; }
+  .ln{ display:inline-block; border-bottom:1.6px dotted var(--muted); min-width:40mm; height:1.1em; vertical-align:bottom; }
+  .ln.w{ display:block; width:100%; margin-top:5.5mm; }
+  .box{ display:inline-block; width:5mm; height:5mm; border:1.6px solid var(--purple); border-radius:1.2mm; vertical-align:-1mm; background:#fff; }
+  .intro{ background:var(--yellow); border-radius:4mm; padding:2.8mm 5mm; margin-bottom:4mm; font-size:11.3pt; line-height:1.4; }
+  .intro b{ color:var(--purple); }
+
+  .part{ position:relative; background:#fff; border-radius:5mm; padding:3.2mm 5mm 3.2mm;
+    margin-bottom:4mm; border:1.5px solid #eadfe8; box-shadow:0 1mm 0 #eadfe8; }
+  .part .num{ position:absolute; top:-3mm; right:-3mm; width:11mm; height:11mm; border-radius:50%;
+    background:var(--purple); color:#fff; font-family:"Secular One"; font-size:15pt; display:flex;
+    align-items:center; justify-content:center; border:2px solid #fff; box-shadow:0 0 0 2px var(--purple); }
+  .part h3{ padding-right:8mm; }
+  .part .hint{ font-size:10.5pt; color:var(--muted); }
+
+  .tf{ width:100%; border-collapse:collapse; font-size:11.3pt; }
+  .tf td{ padding:1.05mm 2mm; border-bottom:1px dashed #e4d8e6; vertical-align:middle; }
+  .tf td.c{ width:11mm; text-align:center; }
+  .tf td.n{ width:6mm; color:var(--orange-d); font-weight:800; }
+  .fix{ font-size:10.8pt; margin-top:2mm; }
+  .fix .row{ display:flex; gap:2mm; align-items:flex-end; margin-top:3mm; }
+  .fix .row span.lbl{ white-space:nowrap; color:var(--purple); font-weight:700; }
+  .fix .row .ln{ flex:1; }
+
+  .two{ display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-top:2mm; }
+  .story{ border-radius:4mm; padding:3mm 4mm; font-size:11pt; }
+  .story.a{ background:#FDF0EA; border:1.5px solid #F2CDBB; }
+  .story.b{ background:var(--purple-l); border:1.5px solid #D7C6E2; }
+  .story b.t{ display:block; font-family:"Secular One"; font-weight:400; font-size:12.5pt; margin-bottom:.5mm; }
+  .story.a b.t{ color:var(--orange-d); } .story.b b.t{ color:var(--purple); }
+  .story .ln.w{ margin-top:4.6mm; }
+  .obj{ display:flex; align-items:flex-end; gap:2mm; font-weight:700; color:var(--purple); }
+  .obj .ln{ flex:1; max-width:70mm; }
+
+  .chat{ background:#E9F3EE; border-radius:4mm; padding:2.5mm 4mm; margin-top:1.5mm; }
+  .bubble{ background:#fff; border-radius:3mm 3mm 3mm 0; padding:2mm 3.5mm; display:inline-block; font-size:11.3pt; box-shadow:0 .6mm 0 rgba(0,0,0,.06); margin-bottom:2.5mm; }
+  .bubble small{ display:block; color:var(--teal); font-weight:800; font-size:9pt; }
+  .reply{ background:#DCF5D0; border-radius:3mm 3mm 0 3mm; padding:2mm 3.5mm 3mm; margin-right:12mm; }
+  .reply small{ display:block; color:#4C8A35; font-weight:800; font-size:9pt; }
+  .reply .ln.w{ border-bottom-color:#8DB37C; margin-top:5.5mm; }
+  .must{ display:flex; gap:2mm; flex-wrap:wrap; margin-top:1.5mm; font-size:10.3pt; }
+  .must span{ background:#fff; border:1.4px solid #c9dcc0; border-radius:4mm; padding:.3mm 3mm; }
+
+  /* lab */
+  .stations{ display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; margin-bottom:4mm; }
+  .st{ background:#fff; border-radius:4mm; border:1.5px solid #eadfe8; padding:3mm; text-align:center; position:relative; }
+  .st .n{ position:absolute; top:-2.5mm; right:-2.5mm; width:9mm; height:9mm; border-radius:50%; background:var(--teal); color:#fff;
+    font-family:"Secular One"; display:flex; align-items:center; justify-content:center; font-size:13pt; border:2px solid #fff; }
+  .st h3{ font-size:12pt; margin-bottom:1mm; }
+  .st .vis{ height:30mm; display:flex; align-items:center; justify-content:center; margin:1mm 0 1.5mm; }
+  .st .vis svg{ max-width:100%; max-height:30mm; }
+  .st p{ font-size:9.8pt; line-height:1.3; margin:0; text-align:right; }
+  .st p b{ color:var(--teal); }
+  .grid{ width:100%; border-collapse:collapse; background:#fff; font-size:10.5pt; margin-bottom:4mm; table-layout:fixed; }
+  .grid th{ background:var(--teal); color:#fff; font-family:"Secular One"; font-weight:400; padding:1.8mm 2mm; font-size:11pt; }
+  .grid td{ border:1.2px solid #cfe5e2; height:15mm; padding:1.5mm 2mm; vertical-align:top; }
+  .grid td:first-child{ background:var(--teal-l); font-weight:800; color:var(--teal); width:24mm; vertical-align:middle; text-align:center; }
+  .riddle{ display:flex; gap:4mm; align-items:center; background:var(--purple-l); border:2px solid var(--purple); border-radius:5mm; padding:3mm 5mm; margin-bottom:4mm; }
+  .tiles{ display:flex; gap:1.5mm; direction:rtl; flex:none; }
+  .tiles span{ width:10mm; height:11mm; border-radius:2mm; background:#fff; border:1.8px solid var(--purple); display:flex; align-items:center; justify-content:center;
+    font-family:"Frank Ruhl Libre"; font-weight:700; font-size:17pt; color:var(--purple); }
+  .tiles span.e{ border-style:dashed; }
+  .tiles .eq{ border:none; background:none; font-family:"Assistant"; color:var(--orange-d); width:6mm; }
+  .riddle p{ font-size:11pt; margin:0; }
+  .cutline{ position:relative; border-top:2px dashed var(--muted); margin:2mm -14mm 3mm; }
+  .cutline span{ position:absolute; top:-3.2mm; right:16mm; background:var(--cream); padding:0 2mm; font-size:10pt; color:var(--muted); }
+  .hyp{ background:#fff; border:2px solid var(--orange); border-radius:5mm; padding:3.5mm 5mm; }
+  .hyp h3{ color:var(--orange-d); }
+
+  .foot{ position:absolute; bottom:5mm; left:0; right:0; text-align:center; font-size:9.5pt; color:var(--muted); }
+
+  /* teacher */
+  .card{ background:#fff; border-radius:4mm; padding:3.5mm 5mm; margin-bottom:4mm; border:1.5px solid #eadfe8; font-size:11pt; }
+  .card ul{ margin:0; padding-right:5mm; } .card li{ margin-bottom:1.2mm; }
+  .key{ width:100%; border-collapse:collapse; font-size:10.6pt; background:#fff; }
+  .key th{ background:var(--orange); color:#fff; font-family:"Secular One"; font-weight:400; padding:1.6mm 3mm; text-align:right; }
+  .key td{ padding:1.6mm 3mm; border-bottom:1px solid #f0e6ea; vertical-align:top; }
+  .key td:first-child{ width:9mm; font-weight:800; color:var(--purple); text-align:center; }
+</style>
+</head>
+<body>
+
+<!-- ============ WORKSHEET 1 ============ -->
+<section class="page">
+  <div class="band"><div class="corner">ספר התניא קדישא · יש מאין</div><div class="corner l">שם: ________________</div>
+    <div class="tab">גם וגם<small>משימת סיכום: יש מיש ויש מאין</small></div></div>
+
+
+  <div class="part">
+    <div class="num">א</div>
+    <h3>בדיקת הבנה</h3>
+    <p class="hint" style="margin-bottom:.5mm">סמני ✓ ליד משפט נכון ו-✗ ליד משפט שגוי. את המשפטים השגויים תקני בשורות שמתחת.</p>
+    <table class="tf">
+      <tr><td class="n">1</td><td>ה' ברא את העולם כמו שצייר מצייר תמונה.</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">2</td><td>אחרי שהעולם נברא, הוא ממשיך להתקיים בכוחות עצמו לפי חוקי הטבע.</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">3</td><td>אילו כח ה' היה מסתלק מהעולם לרגע אחד, העולם היה חוזר לאין ואפס ממש.</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">4</td><td>גם באבן, בגרגר חול ובטיפת מים יש חיות אלוקית שמחייה אותם בכל רגע.</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">5</td><td>קריעת ים סוף היא פלא גדול יותר מבריאת העולם, כי היא נגד הטבע.</td><td class="c"><span class="box"></span></td></tr>
+    </table>
+    <div class="fix">
+      <div class="row"><span class="lbl">תיקון למשפט ___:</span><span class="ln"></span></div>
+      <div class="row"><span class="lbl">תיקון למשפט ___:</span><span class="ln"></span></div>
+      <div class="row"><span class="lbl">תיקון למשפט ___:</span><span class="ln"></span></div>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="num">ב</div>
+    <h3>החפץ שעל השולחן</h3>
+    <div class="obj">החפץ שבחרתי: <span class="ln"></span></div>
+    <div class="two">
+      <div class="story a"><b class="t">הסיפור של יש מיש</b>מי עשה אותו, ומאיזה חומר?<span class="ln w"></span><span class="ln w"></span></div>
+      <div class="story b"><b class="t">הסיפור של יש מאין</b>מי מהווה אותו, ומה היה קורה לו בלי זה?<span class="ln w"></span><span class="ln w"></span></div>
+    </div>
+    <p style="margin:2.5mm 0 0">🤔 <b>שאלת מחשבה:</b> האם יש בעולם דבר שהוא <u>רק</u> יש מיש, בלי יש מאין? נמקי.</p>
+    <span class="ln w"></span>
+  </div>
+
+  <div class="part">
+    <div class="num">ג</div>
+    <h3>להסביר לאחות קטנה</h3>
+    <div class="chat">
+      <div class="bubble"><small>אחותי, כיתה ג'</small>אם ה' כבר ברא את העולם לפני הרבה שנים, מה הוא עושה עכשיו? 🤔</div>
+      <div class="reply"><small>אני</small>
+        <span class="ln w"></span><span class="ln w"></span><span class="ln w"></span><span class="ln w"></span>
+      </div>
+      <div class="must">בתשובה שלי יש: <span>☐ ההבדל בין יש מיש ליש מאין</span><span>☐ משל לבחירתי</span><span>☐ מה זה אומר עלייך, עכשיו</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKSHEET 2 ============ -->
+<section class="page">
+  <div class="band"><div class="corner">ספר התניא קדישא</div><div class="corner l">שם: ________________</div>
+    <div class="tab">מעבדת העין<small>האם אפשר לסמוך על מה שרואים?</small></div></div>
+
+  <div class="intro">🔬 <b>את החוקרת.</b> בכל תחנה: קודם מסתכלים ורושמים מה <b>רואים</b>, ורק אחר כך בודקים מה <b>באמת</b> יש. אסור לדלג על השלב הראשון!</div>
+
+  <div class="stations">
+    <div class="st"><div class="n">1</div><h3>הקשית במים</h3>
+      <div class="vis"><svg viewBox="0 0 80 100"><path d="M18 30 L22 96 H58 L62 30" fill="#DDF1EF" stroke="#2F8F8A" stroke-width="2.5"/><path d="M18 30 H62" stroke="#2F8F8A" stroke-width="2.5"/><rect x="19.5" y="44" width="41" height="51" fill="#9FD6E8" opacity=".7"/><line x1="58" y1="4" x2="44" y2="46" stroke="#E0344B" stroke-width="5" stroke-linecap="round"/><line x1="38" y1="46" x2="30" y2="88" stroke="#E0344B" stroke-width="5" stroke-linecap="round"/></svg></div>
+      <p>הסתכלי על הקשית בכוס מהצד. <b>בדיקה:</b> הוציאי אותה מהמים.</p></div>
+    <div class="st"><div class="n">2</div><h3>שני הקווים</h3>
+      <div class="vis"><svg viewBox="0 0 120 70"><g stroke="#5E3F70" stroke-width="2.6" fill="none" stroke-linecap="round">
+        <line x1="25" y1="18" x2="95" y2="18"/><path d="M25 18 l9 -8 M25 18 l9 8 M95 18 l-9 -8 M95 18 l-9 8"/>
+        <line x1="25" y1="52" x2="95" y2="52"/><path d="M25 52 l-9 -8 M25 52 l-9 8 M95 52 l9 -8 M95 52 l9 8"/></g>
+        <text x="110" y="22" font-size="9" fill="#C9673F" font-weight="700">א</text><text x="4" y="56" font-size="9" fill="#C9673F" font-weight="700">ב</text></svg></div>
+      <p>איזה קו ארוך יותר, א' או ב'? <b>בדיקה:</b> מדדי את שניהם בסרגל.</p></div>
+    <div class="st"><div class="n">3</div><h3>הפס האפור</h3>
+      <div class="vis"><svg viewBox="0 0 120 60"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#111"/><stop offset="1" stop-color="#f4f4f4"/></linearGradient></defs>
+        <rect x="0" y="0" width="120" height="60" rx="4" fill="url(#g)"/><rect x="8" y="24" width="104" height="12" fill="#8a8a8a"/></svg></div>
+      <p>האם הפס בצבע אחיד? <b>בדיקה:</b> כסי את הרקע בשני דפים, כך שרק הפס יישאר גלוי.</p></div>
+  </div>
+
+  <table class="grid">
+    <tr><th style="width:24mm">התחנה</th><th>מה ראיתי?</th><th>מה באמת יש?</th><th>מה הסתיר ממני את האמת?</th></tr>
+    <tr><td>1 · הקשית</td><td></td><td></td><td></td></tr>
+    <tr><td>2 · הקווים</td><td></td><td></td><td></td></tr>
+    <tr><td>3 · הפס</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <div class="riddle">
+    <div class="tiles"><span>ע</span><span>ו</span><span>ל</span><span>ם</span><span class="eq">≈</span><span class="e"></span><span class="e"></span><span class="e"></span><span class="e"></span></div>
+    <p>🧩 <b>חידת המילה:</b> השלימי מילה שבנויה מאותן אותיות שורש כמו "עולם". רמז: היא קשורה למה שגילית בטבלה.<br>למה לדעתך העולם נקרא דווקא בשם הזה?<span class="ln w" style="margin-top:4.5mm"></span></p>
+  </div>
+
+  <div class="cutline"><span>✂️ גוזרים כאן ומכניסים את ההשערה למעטפה של הכיתה</span></div>
+
+  <div class="hyp">
+    <h3>💡 ההשערה שלי לשיעור הבא</h3>
+    <p style="font-size:11pt">בשיעור הקודם למדנו שבכל דבר יש כח אלוקי שמהווה אותו בכל רגע מחדש.<br><b>אם כך, למה אנחנו לא רואים אותו?</b> מה ה"מים", ה"חצים" או ה"רקע" של העולם כולו?</p>
+    <span class="ln w"></span><span class="ln w"></span><span class="ln w"></span>
+    <p style="margin:3mm 0 0;font-size:10pt;color:var(--muted)">שם: ______________ · בשיעור הבא נפתח את המעטפה ונבדוק את ההשערות מול התניא.</p>
+  </div>
+</section>
+
+<!-- ============ TEACHER ============ -->
+<section class="page">
+  <div class="band"><div class="corner">ספר התניא קדישא · יש מאין</div><div class="corner l">דף למורה</div>
+    <div class="tab">הנחיות ותשובות<small>לשני דפי העבודה</small></div></div>
+
+  <h2>דף 1 · גם וגם</h2>
+  <table class="key" style="margin-bottom:3mm">
+    <tr><th>#</th><th>תשובה</th></tr>
+    <tr><td>1</td><td>✗. צייר יוצר <b>יש מיש</b>, מחומר קיים. ה' בורא <b>יש מאין</b>, וגם ה"חומרים" עצמם נבראו (רבן גמליאל: "בכולם כתובה בריאה").</td></tr>
+    <tr><td>2</td><td>✗. העולם צריך את כח ה' בכל רגע, וגם הטבע עצמו מתקיים מכוחו ("כח הפועל בנפעל תמיד").</td></tr>
+    <tr><td>3</td><td>✓.</td></tr>
+    <tr><td>4</td><td>✓. ("מה חידשה החסידות": גם בדומם יש חיות אלוקית.)</td></tr>
+    <tr><td>5</td><td>✗. בריאת העולם יש מאין היא "פלא גדול יותר" מקריעת ים סוף, כי בים סוף המים כבר היו קיימים.</td></tr>
+  </table>
+  <div class="card"><b style="color:var(--purple)">חלק ב, שאלת המחשבה:</b> התשובה היא לא. כל דבר בעולם הוא "גם וגם": את הצורה שלו עשה אדם (יש מיש), אבל עצם קיומו מתהווה בכל רגע מה' (יש מאין). זו הנקודה המרכזית שכדאי לחדד בדיון.<br>
+  <b style="color:var(--purple)">חלק ג:</b> אין נוסח אחד נכון. בודקים שלושה דברים: ההבדל בין השניים מוסבר נכון; המשל מתאים לרעיון של כוח שצריך להיות כל הזמן (מטוס, ים סוף, אור, מאוורר...); ויש התייחסות אישית.</div>
+
+  <h2>דף 2 · מעבדת העין</h2>
+  <div class="card">
+    <ul>
+      <li><b>הכנה:</b> לתחנה 1 צריך כוס שקופה עם מים וקשית. את תחנות 2–3 התלמידות עושות על הדף עצמו, וצריך רק סרגל ושני דפים לכיסוי. <b>חשוב:</b> להדפיס בצבע עם "גרפיקת רקע", אחרת המעבר מכהה לבהיר ברקע של תחנה 3 לא יודפס.</li>
+      <li><b>אם אין כוס בכיתה:</b> תחנה 1 חלופית היא להחזיק אצבע מול העיניים ולעצום כל פעם עין אחרת. האצבע "קופצת", אבל לא זזה.</li>
+      <li><b>תשובות:</b> (1) הקשית נראית שבורה, אבל היא ישרה. המים הסתירו. (2) שני הקווים שווים באורכם, החצים הטעו. (3) הפס כולו בגוון אפור אחד, הרקע הטעה.</li>
+      <li><b>חידת המילה:</b> <b>העלם</b>. העולם מסתיר את החיות האלוקית שמהווה אותו (השיחה של הרבי לפרשת ראה, ביחידת אחדות ה').</li>
+      <li><b>המעטפה:</b> בשיעור הבא קוראים כמה השערות ומשווים אותן לשער היחוד והאמונה, פרק ג: "אילו ניתנה רשות לעין לראות...".</li>
+      <li><b>שימי לב:</b> בכוונה לא השתמשתי במשולש של קניזסה ובתרגיל הכביש, כי הם מופיעים ביחידת אחדות ה' בספר, וכך הם יישארו מפתיעים לשיעור עצמו.</li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>
